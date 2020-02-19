@@ -48,9 +48,9 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbars-rs-food">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="products.php">Products</a></li>
-					<li class="nav-item"><a class="nav-link" href="users.php">Users</a></li>
+					<li class="nav-item active"><a class="nav-link" href="userAll.php">Users</a></li>
 					<li class="nav-item "><a class="nav-link" href="orders.php">Orders</a></li>
 					<li class="nav-item"><a class="nav-link" href="checks.php">Checks</a></li>
 
@@ -75,7 +75,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-				<form id="addUser-form" class="login100-form validate-form flex-sb flex-w" method="POST" action="validations/registerValidation.php">
+				<form id="addUser-form" class="login100-form validate-form flex-sb flex-w" enctype="multipart/form-data" method="POST" action="validations/registerValidation.php">
 					<span class="login100-form-title p-b-32">
 						Add user
 					</span>
@@ -91,7 +91,7 @@
 					</span>
 					<small class="help-block text-danger emailExists"  style="display:none;">This email is already used.</small>
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "email is required">
-						<input class="input100" type="email" name="email" required>
+						<input id="email" class="input100" type="email" name="email" required>
 						
 					</div>
 					
@@ -136,13 +136,17 @@
 						profile Picture
 					</span>
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "profile picture is required">
-						<input class="input100" type="file" name="profile_pic" required>
+						<input class="input100" type="file" name="profile" required>
 						<span class="focus-input100"></span>
 					</div>
 					
-					<div class="container-login100-form-btn">
-						<label for="is_admin">Admin? </label>
-						<input  type="checkbox" name="is_admin" >
+					<div class="flex-sb-m w-full p-b-48">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="admin">
+							<label class="text-danger label-checkbox100" for="ckb1">
+								<strong>Admin?</strong> 
+							</label>
+						</div>
 					</div>
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">

@@ -1,32 +1,31 @@
 <?php
 session_start();
 include_once "randomString.php";
-var_dump($_POST);
-echo generateRandomString();
+var_dump($_FILES);
 $name = $_POST['name'];
 $email = $_POST['email'];
 $pass = $_POST['pass'];
-$room = $_POST['room'];
-$phone = $_POST['phone'];
-$is_admin = $_POST['is_admin'];
+$room = (int)$_POST['room'];
+$phone = (int)$_POST['phone'];
+isset($_POST['admin'])?(int)$admin=1:(int)$admin=0;
+
 
 $passedValidation=1;    
 
+$path = $_FILES['profile']['name'];
+$ext = pathinfo($path, PATHINFO_EXTENSION);
 
- $target_dir = "../assets/images/users";
- $target_file = $target_dir.generateRandomString().basename($_FILES["profile"]["name"]);
-
+ $target_dir = "../../assets/images/users/";
+ $new_name =generateRandomString().".".$ext;
+ $target_file = $target_dir.$new_name;
+ $get_file="../assets/images/users/".$new_name;
 
 function valid_email($str) {
     return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str)) ? FALSE : TRUE;
-  
 }
 function validPassword($pass){
-  $uppercase = preg_match('@[A-Z]@', $pass);
-  $special = preg_match('/[w!$£#%&*\^]/', $pass);
-  if( $special || $uppercase || strlen($pass) != 8) {
+  if( strlen($pass) < 8) {
      return false;
-     $passedValidation=0; 
   }else{
       return true;
   }
@@ -76,13 +75,14 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $passedValidation=0; 
   }
 
-//   if ($passedValidation ==1) {
+  if ($passedValidation ==1) {
     
-//       echo "<h2>User Added successfully</h2>";
-//       include_once "insert.php";
-//      header("refresh:2; url=dashboard.php");
-//   }else {
-//     header("refresh:2; url=info.php");
-//   }
+      echo "<h2>User Added successfully</h2>";
+      // include_once "../test.php";
+      include_once "../databaseQueries/insert.php";
+    //  header("refresh:1; url=../userAll.php");
+  }else {
+    // header("refresh:2; url=info.php");
+  }
 
 ?>
