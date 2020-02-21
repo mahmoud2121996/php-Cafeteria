@@ -28,59 +28,6 @@ session_start();
     <link rel="stylesheet" href="../assets/css/custom.css">
     <link rel="stylesheet" href="../assets/css/homeSelect.css">
 </head>
-<style>
-    #containerFlex {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    .card {
-        padding-top: 10px;
-        display: flex;
-        flex-direction: column;
-        transition: 0.3s;
-        text-align: center;
-        min-width: 250px;
-        max-width: 310px;
-        max-height: 320px;
-        margin: 10px 10px;
-
-    }
-
-    .card h4 {
-        flex-basis: 1;
-    }
-
-    .card:hover {
-        box-shadow: 0px 0px 20px 0 rgba(0, 0, 0, 0.2);
-        transform: scale(1.1);
-    }
-
-    .containerCard {
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        flex-basis: 3;
-    }
-
-    .containerCard img {
-        min-width: 245px;
-        min-height: 223.188px;
-        max-width: 245px;
-        max-height: 223.188px;
-    }
-
-    .footer {
-        flex-basis: 2;
-        border: 1px solid grey;
-        background-color: lightcoral;
-    }
-    .table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td {
-    padding: 5px;
-    }
-</style>
 
 <body>
     <!-- Start header -->
@@ -476,7 +423,7 @@ session_start();
             if (jQuery.isEmptyObject(orderObject) ) {
                 alert("Please Choose products to place an order");
                e.preventDefault();
-            }else if(5 == 4){
+            }else if( selectedCustomer== undefined){
                 $('#select-box').css("border","2px solid red")
                e.preventDefault();
             }else{
