@@ -1,5 +1,33 @@
 <?php
 session_start();
+if(isset($_POST['submit']))
+{ 
+    $dsn = "mysql:host=localhost;dbname=cafeteria_php";
+    $user = "newuser";
+    $passwd = "password";
+    $target_dir = "../assets/images/products/";
+    $file_name = $_FILES['productPicture']['name'];
+    $target_file = $target_dir.$file_name;
+    try 
+    {
+        $pdo = new PDO($dsn, $user, $passwd);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "INSERT INTO products (product_name,price,category_id,image) VALUES (?,?,?,?)";
+        $stmtInsert= $pdo->prepare($sql);
+        $stmtInsert->execute([ $_POST['productName'],$_POST['price'],$_POST['category'],$target_file ]);
+        $source = $_FILES["productPicture"]['tmp_name'];
+       // move_uploaded_file($source,$target_file);
+        if (copy($source, $target_file)) {
+            echo "File is valid, and was successfully uploaded.\n";
+          } else {
+             echo "Upload failed";
+          }
+    }
+    catch(PDOException $e)
+    {
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
@@ -86,12 +114,12 @@ session_start();
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <form id="contactForm">
+                        <form id="contactForm" method="post" action="" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <h2>Product</h2>
-                                        <input type="text" class="form-control" id="product" name="naproductme" placeholder="Product Name" required data-error="Please enter product Name">
+                                        <input type="text" class="form-control" name="productName" placeholder="Product Name" required data-error="Please enter product Name">
                                         <div class="help-block with-errors"></div>
                                     </div>                                 
                                 </div>
@@ -109,12 +137,12 @@ session_start();
                                     <h2>Category</h2>
                                     <div style="display: flex;">
                                         <div class="form-group" style="flex-basis: 87%;">
-                                            <select class="custom-select d-block form-control" id="category" required data-error="Please Select Category">
+                                            <select class="custom-select d-block form-control" name="category" required data-error="Please Select Category">
                                             <option disabled selected>Please Select Category*</option>
-                                            <option value="Hot Drinks">Hot Drinks</option>
-                                            <option value="Cold Drinks">Cold Drinks</option>
-                                            <option value="Meals">Meals</option>
-                                            <option value="Fruits">Fruits</option>
+                                            <option value="1">Hot Drinks</option>
+                                            <option value="2">Cold Drinks</option>
+                                            <option value="3">Meals</option>
+                                            <option value="4">Fruits</option>
                                             </select>
                                             <div class="help-block with-errors"></div>
                                         </div>
@@ -123,13 +151,13 @@ session_start();
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group"> 
-                                        <h2>Profile Picture</h2>
-                                        <input class="input100" type="file" name="profile" required>
+                                        <h2>Product Picture</h2>
+                                        <input class="input100" type="file" name="productPicture" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                     <div class="submit-button text-center" style="display: flex;">
                                         <button class="btn btn-common" id="reset" type="reset">Reset</button>
-                                        <button class="btn btn-common"id="submit" type="submit" style="opacity: 1;margin-left: 5px;">Save</button>
+                                        <button class="btn btn-common"name="submit" type="submit" style="opacity: 1;margin-left: 5px;">Save</button>
                                         <div id="msgSubmit" style="margin-left: 50px;margin-top: 10px;" class="h3 text-center hidden"></div> 
                                         <div class="clearfix"></div> 
                                         
