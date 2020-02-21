@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 24, 2020 at 09:17 AM
+-- Generation Time: Feb 21, 2020 at 02:14 PM
 -- Server version: 10.1.44-MariaDB-0ubuntu0.18.04.1
 -- PHP Version: 7.2.24-0ubuntu0.18.04.2
 
@@ -69,7 +69,6 @@ CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `product_name` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
-  `stock` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -84,7 +83,6 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `is_admin` int(11) NOT NULL DEFAULT '0',
   `profile_path` varchar(255) NOT NULL,
