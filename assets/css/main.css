@@ -194,6 +194,21 @@ iframe {
   margin-top: 100px;
 }
 
+.wrap-mainPage {
+  background: #fff;
+  border-radius: 10px;
+  position: relative;
+  margin-top: 80px;
+  min-height: fit-content;
+}
+.wrap-selectCustomer {
+  background: #fff;
+  border-radius: 10px;
+  position: relative;
+  margin-top: -20px;
+  min-height: fit-content;
+  align-items: center;
+}
 
 /*==================================================================
 [ Form ]*/

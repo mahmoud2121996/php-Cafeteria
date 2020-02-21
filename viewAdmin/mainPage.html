@@ -1,0 +1,287 @@
+<!--  -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>home</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../assets/images/icons/favicon.ico" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../assets/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/main.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	<!-- Site CSS -->
+	<link rel="stylesheet" href="../assets/css/navbar.css">
+	<link rel="stylesheet" href="mainPage.css">
+</head>
+
+<style>
+	#containerFlex {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: center;
+	}
+
+	.card {
+		display: flex;
+		flex-direction: column;
+
+		transition: 0.3s;
+		text-align: center;
+		max-width: 310px;
+		max-height: 320px;
+		margin: 10px 10px;
+	}
+
+	.card h4 {
+		flex-basis: 1;
+	}
+
+	.card:hover {
+		box-shadow: 0px 0px 20px 0 rgba(0, 0, 0, 0.2);
+		transform: scale(1.1);
+	}
+
+	.container {
+		flex-basis: 3;
+	}
+
+	.container image {
+		height: 100%;
+	}
+
+	.footer {
+		flex-basis: 2;
+		border: 1px solid grey;
+		background-color: lightcoral;
+	}
+</style>
+
+<body style="padding: 0 !important;">
+
+	<header class="top-navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="index.html">
+					<img src="../assets/images/logo.png" alt="" />
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food"
+					aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-rs-food">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="products.php">Products</a></li>
+						<li class="nav-item "><a class="nav-link" href="userAll.php">Users</a></li>
+						<li class="nav-item "><a class="nav-link" href="orders.php">Orders</a></li>
+						<li class="nav-item"><a class="nav-link" href="checks.php">Checks</a></li>
+
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a"
+								data-toggle="dropdown">Naguib</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="userAdd.php">Add User</a>
+								<a class="dropdown-item" href="productAdd.php">Add Product</a>
+								<a class="dropdown-item" href="logout.php">Logout</a>
+							</div>
+						</li>
+
+					</ul>
+					&nbsp;
+					<img src="../assets/images/users/user.png" width="5%" alt="Admin">
+
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-mainPage p-l-85 p-r-85 p-t-55 p-b-55 col-lg-2 m-r-25 ">
+				<h1>order</h1>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea praesentium voluptatum consectetur aut saepe
+				temporibus. Sed fugit pariatur perferendis nesciunt rem ratione totam ex, eos expedita, velit enim
+				maxime vitae?
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea praesentium voluptatum consectetur aut saepe
+				temporibus. Sed fugit pariatur perferendis nesciunt rem ratione totam ex, eos expedita, velit enim
+				maxime vitae?
+
+			</div>
+			<div class="wrap-selectCustomer p-l-85 p-r-85 p-t-55 p-b-55 col-lg-9">
+				<div class="container">
+					<h3>Select Customers</h3>
+					<div  class="text-center">
+						<select name="" id="" class="select">
+							<option value="">Naguib</option>
+							<option value="">Omar</option>
+							<option value="">Mahmoud</option>
+						</select>
+					</div>
+					
+				</div>
+				<hr>
+				<div class="container">
+
+					<div id="containerFlex">
+						<div class="card">
+							<h4><b>John Doe</b></h4>
+							<div class="container">
+								<img src="4.jpg" alt="Avatar" style="width:100%" />
+							</div>
+							<div class="footer">
+								<p>Engineer</p>
+							</div>
+						</div>
+						<div class="card">
+							<h4><b>John Doe</b></h4>
+							<div class="container">
+								<img src="4.jpg" alt="Avatar" style="width:100%" />
+							</div>
+							<div class="footer">
+								<p>Architect</p>
+							</div>
+						</div>
+						<div class="card">
+							<h4><b>John Doe</b></h4>
+							<div class="container">
+								<img src="4.jpg" alt="Avatar" style="width:100%" />
+							</div>
+							<div class="footer">
+								<p>Engineer</p>
+							</div>
+						</div>
+						<div class="card">
+							<h4><b>John Doe</b></h4>
+							<div class="container">
+								<img src="4.jpg" alt="Avatar" style="width:100%" />
+							</div>
+							<div class="footer">
+								<p>Architect</p>
+							</div>
+						</div>
+						<div class="card">
+							<h4><b>John Doe</b></h4>
+							<div class="container">
+								<img src="4.jpg" alt="Avatar" style="width:100%" />
+							</div>
+							<div class="footer">
+								<p>Engineer</p>
+							</div>
+						</div>
+						<div class="card">
+							<h4><b>John Doe</b></h4>
+							<div class="container">
+								<img src="4.jpg" alt="Avatar" style="width:100%" />
+							</div>
+							<div class="footer">
+								<p>Architect</p>
+							</div>
+						</div>
+						<div class="card">
+							<h4><b>John Doe</b></h4>
+							<div class="container">
+								<img src="4.jpg" alt="Avatar" style="width:100%" />
+							</div>
+							<div class="footer">
+								<p>Engineer</p>
+							</div>
+						</div>
+						<div class="card">
+							<h4><b>John Doe</b></h4>
+							<div class="container">
+								<img src="4.jpg" alt="Avatar" style="width:100%" />
+							</div>
+							<div class="footer">
+								<p>Architect</p>
+							</div>
+						</div>
+						<div class="card">
+							<h4><b>John Doe</b></h4>
+							<div class="container">
+								<img src="4.jpg" alt="Avatar" style="width:100%" />
+							</div>
+							<div class="footer">
+								<p>Engineer</p>
+							</div>
+						</div>
+						<div class="card">
+							<h4><b>John Doe</b></h4>
+							<div class="container">
+								<img src="4.jpg" alt="Avatar" style="width:100%" />
+							</div>
+							<div class="footer">
+								<p>Architect</p>
+							</div>
+						</div>
+						<div class="card">
+							<h4><b>John Doe</b></h4>
+							<div class="container">
+								<img src="4.jpg" alt="Avatar" style="width:100%" />
+							</div>
+							<div class="footer">
+								<p>Architect</p>
+							</div>
+						</div>
+						<div class="card">
+							<h4><b>John Doe</b></h4>
+							<div class="container">
+								<img src="4.jpg" alt="Avatar" style="width:100%;" />
+							</div>
+							<div class="footer">
+								<p>Architect</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<!--===============================================================================================-->
+	<script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="../assets/vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="../assets/vendor/bootstrap/js/popper.js"></script>
+	<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="../assets/vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="../assets/vendor/daterangepicker/moment.min.js"></script>
+	<script src="../assets/vendor/daterangepicker/daterangepicker.js"></script>
+	<!--===============================================================================================-->
+	<script src="../assets/vendor/countdowntime/countdowntime.js"></script>
+	<!--===============================================================================================-->
+	<script src="../assets/js/main.js"></script>
+	<script src="mainPAge.js"></script>
+
+</body>
+
+</html>
