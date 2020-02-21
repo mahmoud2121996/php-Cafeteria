@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 18, 2020 at 08:47 PM
+-- Generation Time: Feb 24, 2020 at 09:17 AM
 -- Server version: 10.1.44-MariaDB-0ubuntu0.18.04.1
 -- PHP Version: 7.2.24-0ubuntu0.18.04.2
 
@@ -88,7 +88,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `is_admin` int(11) NOT NULL DEFAULT '0',
   `profile_path` varchar(255) NOT NULL,
-  `room-No` int(11) DEFAULT NULL,
+  `room_No` int(11) DEFAULT NULL,
   `Ext` varchar(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
