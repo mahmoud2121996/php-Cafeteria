@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-
+ include_once "databaseQueries/selectCustomers.php";
+ include_once "databaseQueries/selectProducts.php";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<!-- Basic -->
 
 <head>
     <meta charset="utf-8">
@@ -103,31 +103,14 @@ session_start();
                                     </div>
                                 </div>
                                 <div id="options">
+                                <?php foreach($customersAll as $customer): ?>
                                     <div class="option">
-                                        <input class="s-c top" type="radio" name="customer" value="1">
-                                        <input class="s-c bottom" type="radio" name="customer" value="1">
-                                        <span class="label">Omar</span>
-                                        <span class="opt-val">Omar</span>
+                                        <input class="s-c top" type="radio" name="customer" value="<?php echo $customer[0] ?>">
+                                        <input class="s-c bottom" type="radio" name="customer" value="<?php echo $customer[0] ?>">
+                                        <span class="label"><?php echo $customer[1] ?></span>
+                                        <span class="opt-val"><?php echo $customer[1] ?></span>
                                     </div>
-                                    <div class="option">
-                                        <input class="s-c top" type="radio" name="customer" value="Dalia" >
-                                        <input class="s-c bottom" type="radio" name="customer" value="Dalia">
-                                        <span class="label">Dalia</span>
-                                        <span class="opt-val">Dalia</span>
-                                    </div>
-                                    <div class="option">
-                                        <input class="s-c top" type="radio" name="customer" value="Nahla">
-                                        <input class="s-c bottom" type="radio" name="customer" value="Nahla">
-                                        <span class="label">Nahla</span>
-                                        <span class="opt-val">Nahla</span>
-                                    </div>
-                                    <div class="option">
-                                        <input class="s-c top" type="radio" name="customer" value="Mahmoud">
-                                        <input class="s-c bottom" type="radio" name="customer" value="Mahmoud">
-                                        <span class="label">Mahmoud</span>
-                                        <span class="opt-val">Mahmoud</span>
-                                    </div>
-
+                                <?php endforeach; ?>
                                     <div id="option-bg"></div>
                                 </div>
                             </div>
@@ -163,18 +146,21 @@ session_start();
                         <div class="col-md-8 col-lg-9">
                             <h1 style="font-size: 34px;">Available Products</h1>
                             <div id="containerFlex">
-                                <div id="Nescafe" class="card" >
-                                    <h4><b>Nescafe</b></h4>
-                                    <span hidden>1</span>
-                                    <div class="containerCard">
-                                        <!-- sdszd -->
-                                        <img src="../assets/images/products/Nescafe.png" alt="Avatar" />
+                            <?php foreach($productsAll as $product): ?>
+                                    <div id="<?php echo $product[1] ?>" class="card" >
+                                        <h4><b><?php echo $product[1] ?></b></h4>
+                                        <span hidden><?php echo $product[0] ?></span>
+                                        <div class="containerCard">
+                                            <!-- sdszd -->
+                                            <img src="<?php echo $product[4] ?>" />
+                                        </div>
+                                        <div class="footer">
+                                            <strong><span><?php echo $product[2] ?></span> EGP</strong>
+                                        </div>
                                     </div>
-                                    <div class="footer">
-                                        <strong><span>8.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div id="Tea" class="card">
+                            <?php endforeach; ?>
+                               
+                                <!-- <div id="Tea" class="card">
                                     <span hidden>2</span>
                                     <h4><b>Tea</b></h4>
                                     <div class="containerCard">
@@ -310,7 +296,7 @@ session_start();
                                     <div class="footer">
                                         <strong><span>12.50</span> EGP</strong>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

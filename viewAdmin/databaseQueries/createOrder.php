@@ -1,24 +1,23 @@
 <?php 
-// order status   0 -> recieved
-//                1 -> outforDelivery
-//                2 -> done
-
+echo "create";
 
 
 try {
     include_once "connection.php";
 
-    $stmt = $pdo->prepare("INSERT INTO orders (customer_id, admin_id,notes,total) VALUES(?,?)");
-
-    try {
-        $dbh->beginTransaction();
-        $tmt->execute( array('user', 'user@example.com'));
-        $dbh->commit();
-        print $dbh->lastInsertId();
-    } catch(PDOExecption $e) {
-        $dbh->rollback();
-        print "Error!: " . $e->getMessage() . "</br>";
+    $sql = "INSERT INTO orders (customer_id,total,notes,status) VALUES(?,?,?,?)";
+   
+    $stmtInsert= $pdo->prepare($sql);
+    $stmtInsert->execute([$customerSelected,$total,$notes,"recieved"]);
+    $ordrId=$pdo->lastInsertId();
+    if ($ordrId) {
+        foreach ($orderObject as $key => $value) {
+            $sqlOrderProduct = "INSERT INTO order_product (order_id,product_id,number) VALUES(?,?,?)";
+            $stmtInsertOrderProduct= $pdo->prepare($sqlOrderProduct);
+            $stmtInsertOrderProduct->execute([$ordrId,$key,$value]);
+        }    
     }
+    header("location:../orders.php");
 } catch( PDOExecption $e ) {
     print "Error!: " . $e->getMessage() . "</br>";
 } 

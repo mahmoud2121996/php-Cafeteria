@@ -6,7 +6,7 @@ $name = $_POST['name'];
 $email = $_POST['email'];
 $pass = $_POST['pass'];
 $room = (int)$_POST['room'];
-$ext = (int)$_POST['ext'];
+$Rext = (int)$_POST['ext'];
 isset($_POST['admin'])?(int)$admin=1:(int)$admin=0;
 
 
@@ -77,12 +77,11 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
   if ($passedValidation ==1) {
     
-      echo "<h2>User Added successfully</h2>";
-      // include_once "../test.php";
+      // echo "<h2>User Added successfully</h2>";
       include_once "../databaseQueries/insert.php";
-    //  header("refresh:1; url=../userAll.php");
+     header("refresh:1; url=../userAll.php");
   }else {
-    // header("refresh:2; url=info.php");
+    header("refresh:2; url=../userAdd.php");
   }
 
 ?>
