@@ -126,10 +126,10 @@
 						<span class="focus-input100"></span>
 					</div>
 					<span class="txt1 p-b-11">
-						phone
+						Ext.
 					</span>
-					<div class="wrap-input100 validate-input m-b-36" data-validate = "phone is required">
-						<input class="input100" type="phone" name="phone" required>
+					<div class="wrap-input100 validate-input m-b-36" data-validate = "Ext. is required">
+						<input class="input100" type="phone" name="ext" required>
 						<span class="focus-input100"></span>
 					</div>
 					<span class="txt1 p-b-11">
