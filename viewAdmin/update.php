@@ -23,11 +23,12 @@
         $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
        
         $query = "UPDATE users SET name= '$name' , email= '$email',  is_admin='$is_admin' , profile_path='$profilepath' , room_No='$room_No', ext='$ext' where id='$id' ;";
-       echo $query;
+      
         $pdoResult = $con->prepare($query);
         
         $pdoExec = $pdoResult->execute();
-         echo"success";
+        header('Location: view-users.php');
+      
     } catch(PDOException $e)
     {
           echo "Connectionupdatefailed: " . $e->getMessage();
