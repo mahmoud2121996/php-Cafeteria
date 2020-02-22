@@ -1,27 +1,39 @@
 <?php
     session_start();
+    $id = $_GET['id'];
+ 
+    $dsn = $_SESSION["dsn"];
+    $user = $_SESSION["user"];
+    $pass = $_SESSION["pass"];
 
-    $dateFrom = $_POST["dateFrom"];
-    $dateTo = $_POST["dateTo"];
+    $dateForm = $_SESSION["dateForm"];
+    $dateTo = $_SESSION["dateTo"];
 
-    // echo $dateFrom;
 
-    $dsn = "mysql:dbname=cafeteria_php;host=localhost;port=3308;";
-    $user = "dalia";
-    $pass = "123";
 
-    $_SESSION["dsn"] = $dsn;
-    $_SESSION["user"] = $user;
-    $_SESSION["pass"] = $pass;
-
-    $_SESSION["dateFrom"] = $dateFrom;
-    $_SESSION["dateTo"] = $dateTo;
-
+    Delete($dsn , $user, $pass , $id);
     Select($dsn, $user, $pass, $dateFrom, $dateTo);
+
+    function Delete($dsn , $user, $pass , $id)
+    {
+        try 
+        {
+            $conn = new PDO($dsn , $user, $pass);
+
+            $query = "DELETE FROM orders WHERE id = $id;";
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+            echo "Deleted Successfully...";
+            $conn = null;
+        }
+        catch(PDOException $e)
+        {
+            echo "Connection Failed: " . $e->getMessage();
+        }
+    }
 
     function Select($dsn , $user, $pass , $dateFrom , $dateTo)
     {
-
         $conn = new PDO($dsn , $user, $pass);
         $query = "SELECT * FROM orders WHERE created_at BETWEEN '$dateFrom' AND '$dateTo'; ";
         $stmt = $conn->prepare($query);
@@ -33,7 +45,6 @@
                 <th>Status</th>
                 <th>price</th>
                 <th>Action</th>
-                <th>Products</th>
             </tr>';
         while ($row = $stmt->fetch()) {
             echo "<tr>";
@@ -45,11 +56,11 @@
                     echo "<a href=\"cancelOrder.php?id=".$row['id']."\">Cancel</a>";
                     echo "</td>";
                 }
-                echo "<td>";
-                echo "<div class='pImages'> + </div>";
-                echo "</td>";
+                
             echo "</tr>";
         }
         echo '</table>';
     }
+
+
 ?>
