@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +73,7 @@ session_start();
 					
 					<div class="flex-sb-m w-full p-b-48">
 						<div>
-							<a href="forgotPassword.php" class="txt3">
+							<a href="forgotPassword.html" class="txt3">
 								Forgot Password?
 							</a>
 						</div>
