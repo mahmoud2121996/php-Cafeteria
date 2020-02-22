@@ -111,7 +111,7 @@
 											<td>" . $row["product_name"] . "</td>
 											<td>" . $row["price"] . "</td>
 											<td>" . $row["category_id"] . "</td>
-											<td> <img src='" . $row["image"] . "' width='50px' height='50px'></td>
+											<td> <img src='" . $row["profile_path"] . "' width='50px' height='50px'></td>
 											<td><a href='deleteProducts.php?id=" . $row["id"] . "' >delete</a> 
 											<a href='updateProduct.php?id=" . $row["id"] . "' >update</a>
 											</td>
