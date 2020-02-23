@@ -1,13 +1,13 @@
 <?php
-    session_start();
+    // session_start();
     $id = $_GET['id'];
  
-    $dsn = $_SESSION["dsn"];
-    $user = $_SESSION["user"];
-    $pass = $_SESSION["pass"];
+    // $dsn = $_SESSION["dsn"];
+    // $user = $_SESSION["user"];
+    // $pass = $_SESSION["pass"];
 
-    $dateForm = $_SESSION["dateForm"];
-    $dateTo = $_SESSION["dateTo"];
+    // $dateForm = $_SESSION["dateForm"];
+    // $dateTo = $_SESSION["dateTo"];
 
 
 

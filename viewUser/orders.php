@@ -1,12 +1,12 @@
 <?php
-    session_start();
+    //session_start();
 
     $dateFrom = $_POST["dateFrom"];
     $dateTo = $_POST["dateTo"];
 
     // echo $dateFrom;
 
-    $dsn = "mysql:dbname=cafeteria_php;host=localhost;port=3308;";
+    /*$dsn = "mysql:dbname=cafeteria_php;host=localhost;port=3308;";
     $user = "dalia";
     $pass = "123";
 
@@ -15,7 +15,7 @@
     $_SESSION["pass"] = $pass;
 
     $_SESSION["dateFrom"] = $dateFrom;
-    $_SESSION["dateTo"] = $dateTo;
+    $_SESSION["dateTo"] = $dateTo;*/
 
     Select($dsn, $user, $pass, $dateFrom, $dateTo);
 
