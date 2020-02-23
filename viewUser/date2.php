@@ -151,7 +151,7 @@ session_start();
                                         <td align="center"><?php echo $row["total"]; ?></td>
                                         <?php if ($row["status"] == "processing"){?>
                                             <td align="center">
-                                            <a href="cancelOrder.php?id=<?php echo $row["id"]; ?>">Cancel</a>
+                                            <a class="trash" href="#" id=<?php echo $row["id"]; ?>>Cancel</a>
                                             </td>
                                         <?php } ?>
                                         </tr>
@@ -193,5 +193,21 @@ session_start();
     
     <!--===============================================================================================-->
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/admin/addUser.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>    
+            $('.trash').click(function(){
+                var del_id= $(this).attr('id');
+                var $ele = $(this).parent().parent();
+                //alert(del_id);
+                $.ajax({
+                url:"cancelOrder.php?id="+ del_id,
+                success: function(result){
+                        $ele.fadeOut().remove();
+                        alert("Deleted Successfully");
+                }
+
+                    })
+                    })
+                
+    </script>
 </html>
