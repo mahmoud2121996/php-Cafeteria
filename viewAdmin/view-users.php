@@ -116,7 +116,7 @@
                     echo "<td>" . $row['name'] . "<br>" . "</td>";
                     echo "<td>" . $row['email'] . "<br>" . "</td>";
                     echo "<td>" . $row['is_admin'] . "<br>" . "</td>";
-                    echo "<td><img src=../assets/images/users/" . $row["profile_path"] . "height='100' width='100'>";"</td>";
+                    echo "<td><img src='" . $row["profile_path"] . "' height='100' width='100'>";"</td>";
 
                     echo "<td>" . $row['room_No'] . "<br>" . "</td>";
                     echo "<td>" . $row['Ext'] . "<br>" . "</td>";
