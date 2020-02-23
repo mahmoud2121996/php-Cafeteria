@@ -1,20 +1,14 @@
 <?php
-    session_start();
+    // session_start();
+    include("databaseConnection.php");
     $id = $_REQUEST['id'];
-    $dsn = $_SESSION["dsn"];
-    $user = $_SESSION["user"];
-    $pass = $_SESSION["pass"];
-
-    // $dateForm = $_SESSION["dateForm"];
-    // $dateTo = $_SESSION["dateTo"];
-
     try 
     {
-        $conn = new PDO($dsn , $user, $pass);
+        $conn = $_SESSION["conn"];
         $query = "DELETE FROM orders WHERE id = $id;";
         $stmt = $conn->prepare($query);
         $stmt->execute();
-        $conn = null;
+        // $conn = null;
     }
     catch(PDOException $e)
     {
