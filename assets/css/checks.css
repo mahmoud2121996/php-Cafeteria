@@ -107,3 +107,8 @@ h3 {
 .ac-sub-text {
   padding: 0 1em 0 2em;
 }
+
+.date {
+  margin: 20px;
+  border: 2px solid rgb(115, 115, 224);
+}
