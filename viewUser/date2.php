@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
@@ -126,17 +126,13 @@ session_start();
                                         <?php
                                         $dateFrom = $_POST["dateFrom"];
                                         $dateTo = $_POST["dateTo"];
-                                        $dsn = "mysql:dbname=cafe_new;host=localhost;port=3308;";
-                                        $user = "newuser";
-                                        $pass = "password";
-                                        $_SESSION["dsn"] = $dsn;
-                                        $_SESSION["user"] = $user;
-                                        $_SESSION["pass"] = $pass;
+                                        include("databaseConnection.php");
+                                        $conn = $_SESSION["conn"];
                                         $_SESSION["dateFrom"] = $dateFrom;
                                         $_SESSION["dateTo"] = $dateTo;
-                                        $conn = new PDO($dsn , $user, $pass);
+                                        // $conn = new PDO($dsn , $user, $pass);
                                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                        $query = "SELECT * FROM orders WHERE created_at BETWEEN '$dateFrom' AND '$dateTo'; ";
+                                        $query = "SELECT * FROM orders WHERE created_at BETWEEN '$dateFrom' AND '$dateTo' OR created_at BETWEEN '$dateTo' AND '$dateFrom'; ";
                                         $stmt = $conn->prepare($query);
                                         $stmt->execute();
 
@@ -198,11 +194,10 @@ session_start();
             $('.trash').click(function(){
                 var del_id= $(this).attr('id');
                 var $ele = $(this).parent().parent();
-                //alert(del_id);
                 $.ajax({
-                url:"cancelOrder.php?id="+ del_id,
+                    url:"cancelOrder.php?id="+ del_id,
                 success: function(result){
-                        $ele.fadeOut().remove();
+                        $ele.remove();
                         alert("Deleted Successfully");
                 }
 

@@ -1,20 +1,12 @@
 <?php
-    //session_start();
-    // $id = $_GET['id'];
-    // include("databaseConnection.php");
-    $conn = $_SESSION["conn"];
-    $dsn = $_SESSION["dsn"];
-    $user = $_SESSION["user"];
-    $pass = $_SESSION["pass"];
-
-$dsn = "mysql:dbname=cafe_new;host=localhost;port=3308;";
-$user = "newuser";
-$pass = "password";
-
+    // session_start();
+    $id = $_GET['id'];
+    include("databaseConnection.php");
+    
     try {
-
-        $conn = new PDO($dsn, $user, $pass);
-        echo $conn;
+        $conn = $_SESSION["conn"];
+        // $conn = new PDO($dsn, $user, $pass);
+        // echo $conn;
         $query = "SELECT product_id FROM order_product WHERE order_id = '$id';";
         $stmt = $conn->prepare($query);
         $stmt->execute();
