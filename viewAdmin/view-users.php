@@ -73,6 +73,7 @@
     } catch (PDOException $e) {
       echo "Connection failed: " . $e->getMessage();
     }
+
     ?>
 
     <div id="tabs" class="project-tab" style="margin-top: 50px;">
@@ -88,7 +89,7 @@
             <div class="tab-content" id="nav-tabContent">
               <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                <table class="table" cellspacing="0">
+                <table class="table" cellspacing="15" border="1">
 
 
 
@@ -115,7 +116,8 @@
                     echo "<td>" . $row['name'] . "<br>" . "</td>";
                     echo "<td>" . $row['email'] . "<br>" . "</td>";
                     echo "<td>" . $row['is_admin'] . "<br>" . "</td>";
-                    echo "<td>" . $row['profile_path'] . "<br>";
+                    echo "<td><img src=../assets/images/users/" . $row["profile_path"] . "height='100' width='100'>";"</td>";
+
                     echo "<td>" . $row['room_No'] . "<br>" . "</td>";
                     echo "<td>" . $row['Ext'] . "<br>" . "</td>";
 

@@ -6,7 +6,7 @@ $name = $_POST['name'];
 $email = $_POST['email'];
 $pass = $_POST['pass'];
 $room = (int)$_POST['room'];
-$phone = (int)$_POST['phone'];
+$Rext = (int)$_POST['ext'];
 isset($_POST['admin'])?(int)$admin=1:(int)$admin=0;
 
 
@@ -70,19 +70,18 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo "<h3>room is empty</h3>";
     $passedValidation=0; 
   }
-  if (empty($phone)) {
-    echo "<h3>phone is empty</h3>";
+  if (empty($ext)) {
+    echo "<h3>ext is empty</h3>";
     $passedValidation=0; 
   }
 
   if ($passedValidation ==1) {
     
-      echo "<h2>User Added successfully</h2>";
-      // include_once "../test.php";
+      // echo "<h2>User Added successfully</h2>";
       include_once "../databaseQueries/insert.php";
-    //  header("refresh:1; url=../userAll.php");
+     header("refresh:1; url=../userAll.php");
   }else {
-    // header("refresh:2; url=info.php");
+    header("refresh:2; url=../userAdd.php");
   }
 
 ?>

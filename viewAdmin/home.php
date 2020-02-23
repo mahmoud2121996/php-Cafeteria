@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-
+ include_once "databaseQueries/selectCustomers.php";
+ include_once "databaseQueries/selectProducts.php";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<!-- Basic -->
 
 <head>
     <meta charset="utf-8">
@@ -23,11 +23,12 @@ session_start();
     <!-- Site CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
     <!-- Responsive CSS -->
-    <!-- <link rel="stylesheet" href="../assets/css/responsive.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../assets/css/custom.css">
-    <link rel="stylesheet" href="../assets/css/homeSelect.css">
+    <link rel="stylesheet" href="../assets/css/homePageAdmin.css">
 </head>
+
 
 <body>
     <!-- Start header -->
@@ -84,11 +85,11 @@ session_start();
 
     <!-- Start Contact -->
     <div class="contact-box">
-        <div class="container">
+        <div class="col-12 p-5">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="heading-title text-center" style="z-index: 10000;">
-                        <h2>Products</h2>
+                        <h2>Choose Customer</h2>
                         <form id="app-cover">
                             <div id="select-box">
                                 <input type="checkbox" id="options-view-button">
@@ -102,31 +103,14 @@ session_start();
                                     </div>
                                 </div>
                                 <div id="options">
+                                <?php foreach($customersAll as $customer): ?>
                                     <div class="option">
-                                        <input class="s-c top" type="radio" name="customer" value="1">
-                                        <input class="s-c bottom" type="radio" name="customer" value="1">
-                                        <span class="label">Omar</span>
-                                        <span class="opt-val">Omar</span>
+                                        <input class="s-c top" type="radio" name="customer" value="<?php echo $customer[0] ?>">
+                                        <input class="s-c bottom" type="radio" name="customer" value="<?php echo $customer[0] ?>">
+                                        <span class="label"><?php echo $customer[1] ?></span>
+                                        <span class="opt-val"><?php echo $customer[1] ?></span>
                                     </div>
-                                    <div class="option">
-                                        <input class="s-c top" type="radio" name="customer" value="Dalia" >
-                                        <input class="s-c bottom" type="radio" name="customer" value="Dalia">
-                                        <span class="label">Dalia</span>
-                                        <span class="opt-val">Dalia</span>
-                                    </div>
-                                    <div class="option">
-                                        <input class="s-c top" type="radio" name="customer" value="Nahla">
-                                        <input class="s-c bottom" type="radio" name="customer" value="Nahla">
-                                        <span class="label">Nahla</span>
-                                        <span class="opt-val">Nahla</span>
-                                    </div>
-                                    <div class="option">
-                                        <input class="s-c top" type="radio" name="customer" value="Mahmoud">
-                                        <input class="s-c bottom" type="radio" name="customer" value="Mahmoud">
-                                        <span class="label">Mahmoud</span>
-                                        <span class="opt-val">Mahmoud</span>
-                                    </div>
-
+                                <?php endforeach; ?>
                                     <div id="option-bg"></div>
                                 </div>
                             </div>
@@ -135,15 +119,14 @@ session_start();
                 </div>
 
             </div>
-            <br>
             <hr>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
-                        <div class="col-md-3  shadow-lg p-3 mb-5 bg-white rounded text-center h-50">
+                        <div class="col-md-4 col-lg-3 shadow-lg p-3 mb-5 bg-white rounded text-center h-50 .overflow-auto">
                             <h1> Order List</h1>
                             <div id="order-Wrapper-admin">
-                                <form action="" method="GET">
+                                <form action="validations/createOrderValidation.php" method="POST" >
                                 <table id="productsTable" class="w-100 table table-striped table-condensed .thead-dark">
                                     <tbody>
 
@@ -151,163 +134,30 @@ session_start();
                                     
                                 </table>
                                 <input id="customerSelected" type="text" name="customerSelected" hidden value="">
-                                <input id="products" type="text" name="products" hidden value="">
+                                <input id="products" type="text" name="products" hidden value="" >
+                                <input id="totalSentToBackend" type="text" name="total" hidden value="">
+                                <textarea name="notes" id="" cols="3" class="col-12" placeholder="Any special Requests?"></textarea><br>
                                     <input id="submit-btn" class="btn-lg shadow-lg" type="submit" value="Order!" style="background-color:#d0a772;">
                                 </form>
-                                <h1 class="m-5">Total : <strong> 24 </strong> EGP</h1>
+                                <h1 class="m-5">Total : <strong id="total"> 0.00 </strong> EGP</h1>
                             </div>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8 col-lg-9">
                             <h1 style="font-size: 34px;">Available Products</h1>
                             <div id="containerFlex">
-                                <div class="card" >
-                                    <h4><b>Nescafe</b></h4>
-                                    <span hidden>1</span>
-                                    <div class="containerCard">
-                                        <!-- sdszd -->
-                                        <img src="../assets/images/products/Nescafe.png" alt="Avatar" />
+                            <?php foreach($productsAll as $product): ?>
+                                    <div id="<?php echo $product[1] ?>" class="card" >
+                                        <h4><b><?php echo $product[1] ?></b></h4>
+                                        <span hidden><?php echo $product[0] ?></span>
+                                        <div class="containerCard">
+                                            <!-- sdszd -->
+                                            <img src="<?php echo $product[4] ?>" />
+                                        </div>
+                                        <div class="footer">
+                                            <strong><span><?php echo $product[2] ?></span> EGP</strong>
+                                        </div>
                                     </div>
-                                    <div class="footer">
-                                        <strong><span>8.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>2</span>
-                                    <h4><b>Tea</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/tea.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>5.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>3</span>
-                                    <h4><b>Coffee</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/coffee.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>6.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>4</span>
-                                    <h4><b>Water</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/water.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>4.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>5</span>
-                                    <h4><b>Orange Juice</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/orangeJuice.jfif" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>10.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>6</span>
-                                    <h4><b>watermelon Juice</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/watermelon.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>10.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>7</span>
-                                    <h4><b>Beans Sandwich</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/beans.webp" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>3.50</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <h4><b>Choclate Pate</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/chocolatePate.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>12.50</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <h4><b>Tea</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/tea.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>5.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <h4><b>Coffee</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/coffee.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>6.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>8</span>
-                                    <h4><b>Water</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/water.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>4.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>9</span>
-                                    <h4><b>Orange Juice</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/orangeJuice.jfif" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>10.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>10</span>
-                                    <h4><b>watermelon Juice</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/watermelon.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>10.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>11</span>
-                                    <h4><b>Beans Sandwich</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/beans.webp" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>3.50</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>12</span>
-                                    <h4><b>Choclate Pate</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/chocolatePate.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>12.50</span> EGP</strong>
-                                    </div>
-                                </div>
+                            <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
@@ -341,101 +191,10 @@ session_start();
 
     <!--===============================================================================================-->
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/admin/homePageAdmin.js"></script>
 
     <script>
     // define the 2 values that will be sent to back end; 
-        let  products = $('#productsTable').html();
-        let orderObject={};
-        let selectedCustomer;
-        let quantityElemen;
-        const  customerSelected =$("#customerSelected");
-        const  productsJSON =$("#products");
-    //increase and decrease the products count
-        $('input[name="customer"]').click(function () {
-             selectedCustomer = $(this).val();
-        });
-        
-        
-        function updateProducts() {
-            $(".increaseProduct").unbind();
-            $(".decreaseProduct").unbind();
-            $(".increaseProduct").click(function () {
-            productId=parseInt($(this).parent().parent().find(".product-id").html()) ;
-            quantityElement = $(this).parent().parent().find(".quantity");
-            priceUnit= parseFloat($(this).parent().parent().find(".priceUnit").html());
-            priceTotalElement= $(this).parent().parent().find(".priceTotal");
-            quantity = parseInt(quantityElement.html());
-            newQuantity = parseFloat(quantity+ 1);
-            priceTotalElement.html((newQuantity*priceUnit).toFixed(2));
-            quantityElement.html(newQuantity);
-            increaseOrderObject(productId)
-            });
-
-            $(".decreaseProduct").click(function () {
-            productId=parseInt($(this).parent().parent().find(".product-id").html()) ;    
-            quantityElement = $(this).parent().parent().find(".quantity");
-            priceUnit= parseFloat($(this).parent().parent().find(".priceUnit").html());
-            priceTotalElement= $(this).parent().parent().find(".priceTotal");
-            quantity = parseInt(quantityElement.html()) ;
-            newQuantity = parseFloat(quantity- 1);
-         
-            decreaseOrderObject(productId);
-            if (newQuantity ==0) {
-                $(this).parent().parent().remove();
-            } else {
-                priceTotalElement.html((newQuantity*priceUnit).toFixed(2));
-                quantityElement.html(newQuantity);
-            }
-
-            });
-        }
-        
-
-        function increaseOrderObject(id){
-            orderObject[id.toString()] +=1;
-        }
-        function decreaseOrderObject(id){
-           if (orderObject[id.toString()] == 1) {
-             delete orderObject[id.toString()];
-           }else{
-                orderObject[id.toString()] -=1;
-           }
-        }
-
-        $(".card").click(function () {
-            id=$(this).find('span').html();
-            name=$(this).find('b').html();
-            price=$(this).find('strong').find('span').html();
-            orderObject[id.toString()]=1;
-            $('#productsTable > tbody:last-child').append(` <tr>
-                                        <th class="product-id" hidden>${id}</th>
-                                        <th class="product-name">${name}</th>
-                                        <td class="quantity">1</td>
-                                        <td><button type="button" class="decreaseProduct btn-sm btn-danger">&minus;</button></td>
-                                        <td><button type="button" class="increaseProduct btn-sm btn-success">&plus;</button></td><td class="priceTotal">${price}</td><td class="priceUnit" hidden>${price}</td>
-
-                                    </tr>`);
-            $(this).off('click');
-            updateProducts();
-        });
-
-        $("#submit-btn").click(function (e) {
-            if (jQuery.isEmptyObject(orderObject) ) {
-                alert("Please Choose products to place an order");
-               e.preventDefault();
-            }else if( selectedCustomer== undefined){
-                $('#select-box').css("border","2px solid red")
-               e.preventDefault();
-            }else{
-            //    e.preventDefault();
-                customerSelected.val(selectedCustomer);
-                productsJSON.val(orderObject.toString());
-
-            }
-        });
-        
-
-        
 
     </script>
 
