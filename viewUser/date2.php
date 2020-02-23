@@ -9,7 +9,7 @@ session_start();
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
      <!-- Site Metas -->
-    <title>Add Products</title>  
+    <title>My Orders</title>  
     <!-- Site Icons -->
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
