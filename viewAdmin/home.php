@@ -23,7 +23,7 @@ session_start();
     <!-- Site CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
     <!-- Responsive CSS -->
-    <!-- <link rel="stylesheet" href="../assets/css/responsive.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../assets/css/custom.css">
     <link rel="stylesheet" href="../assets/css/homePageAdmin.css">
@@ -85,7 +85,7 @@ session_start();
 
     <!-- Start Contact -->
     <div class="contact-box">
-        <div class="col-12">
+        <div class="col-12 p-5">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="heading-title text-center" style="z-index: 10000;">
@@ -119,7 +119,6 @@ session_start();
                 </div>
 
             </div>
-            <br>
             <hr>
             <div class="row">
                 <div class="col-lg-12">
@@ -135,9 +134,9 @@ session_start();
                                     
                                 </table>
                                 <input id="customerSelected" type="text" name="customerSelected" hidden value="">
-                                <input id="products" type="text" name="products" hidden value="">
+                                <input id="products" type="text" name="products" hidden value="" >
                                 <input id="totalSentToBackend" type="text" name="total" hidden value="">
-                                <textarea name="notes" id="" cols="3" class="col-12"></textarea><br>
+                                <textarea name="notes" id="" cols="3" class="col-12" placeholder="Any special Requests?"></textarea><br>
                                     <input id="submit-btn" class="btn-lg shadow-lg" type="submit" value="Order!" style="background-color:#d0a772;">
                                 </form>
                                 <h1 class="m-5">Total : <strong id="total"> 0.00 </strong> EGP</h1>
@@ -159,144 +158,6 @@ session_start();
                                         </div>
                                     </div>
                             <?php endforeach; ?>
-                               
-                                <!-- <div id="Tea" class="card">
-                                    <span hidden>2</span>
-                                    <h4><b>Tea</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/tea.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>5.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div id="Coffee" class="card">
-                                    <span hidden>3</span>
-                                    <h4><b>Coffee</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/coffee.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>6.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div id="Water" class="card">
-                                    <span hidden>4</span>
-                                    <h4><b>Water</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/water.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>4.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div id="Orange" class="card">
-                                    <span hidden>5</span>
-                                    <h4><b>Orange Juice</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/orangeJuice.jfif" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>10.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>6</span>
-                                    <h4><b>watermelon Juice</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/watermelon.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>10.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>7</span>
-                                    <h4><b>Beans Sandwich</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/beans.webp" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>3.50</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <h4><b>Choclate Pate</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/chocolatePate.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>12.50</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <h4><b>Tea</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/tea.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>5.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <h4><b>Coffee</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/coffee.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>6.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>8</span>
-                                    <h4><b>Water</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/water.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>4.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>9</span>
-                                    <h4><b>Orange Juice</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/orangeJuice.jfif" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>10.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>10</span>
-                                    <h4><b>watermelon Juice</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/watermelon.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>10.00</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>11</span>
-                                    <h4><b>Beans Sandwich</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/beans.webp" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>3.50</span> EGP</strong>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <span hidden>12</span>
-                                    <h4><b>Choclate Pate</b></h4>
-                                    <div class="containerCard">
-                                        <img src="../assets/images/products/chocolatePate.jpg" alt="Avatar" />
-                                    </div>
-                                    <div class="footer">
-                                        <strong><span>12.50</span> EGP</strong>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
