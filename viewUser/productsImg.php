@@ -2,9 +2,9 @@
 session_start();
 $id = $_GET['id'];
 
-$dsn = $_SESSION["dsn"];
-$user = $_SESSION["user"];
-$pass = $_SESSION["pass"];
+$dsn = "mysql:dbname=cafe_new;host=localhost;port=3308;";
+$user = "newuser";
+$pass = "password";
 
 $dateForm = $_SESSION["dateForm"];
 $dateTo = $_SESSION["dateTo"];
