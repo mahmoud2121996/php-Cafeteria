@@ -92,14 +92,14 @@ session_start();
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <h2>Date From : </h2>
-                                        <input type="date" value="<?php echo $_SESSION["dateFrom"];?>" data-format="dd-MM-yyyy" name="dateFrom" class="form-control" >
+                                        <input type="date" data-format="dd-MM-yyyy" name="dateFrom" class="form-control" >
                                         <div class="help-block with-errors"></div>
                                     </div>                                 
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <h2>Date To :</h2>
-                                        <input type="date" value="<?php echo $_SESSION["date"];?>" class="form-control" data-format="dd-MM-yyyy" name="dateTo">
+                                        <input type="date" class="form-control" data-format="dd-MM-yyyy" name="dateTo">
                                         <div class="help-block with-errors"></div>
                                     </div>                                 
                                 </div>
