@@ -1,25 +1,4 @@
-<?php
 
-$passworderror = "";
-$servername = "localhost";
-$username = "root";
-$password = "";
-try {
-	$con = new PDO("mysql:host=127.0.0.1;dbname=cafeteria_php;", $username, $password);
-	$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-	echo "Connectionupdatefailed: " . $e->getMessage();
-}
-
-
-if ($_POST["pass"] !== $_POST["passConfirm"]) {
-	$passworderror = "password not match";
-	" <br/>";
-}
-
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,7 +35,43 @@ if ($_POST["pass"] !== $_POST["passConfirm"]) {
 </head>
 
 <body>
-   
+<?php
+
+$passworderror = "";
+$servername = "localhost";
+$username = "root";
+$password = "";
+
+
+if(isset($_POST['update']))
+{
+	if ($_POST["pass"] !== $_POST["passConfirm"]) {
+		$passworderror = "password not match";
+		" <br/>";
+	}
+	else{
+		$pass=$_POST["pass"];
+        $email=$_POST["username"];
+	try {
+		$con = new PDO("mysql:host=127.0.0.1;dbname=cafeteria_php;", $username, $password);
+        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       
+        $query = "UPDATE users SET password= '$pass'  where email='$email' ;";
+      
+        $pdoResult = $con->prepare($query);
+        
+        $pdoExec = $pdoResult->execute();
+       
+	} catch (PDOException $e) {
+		echo "Connectionupdatefailed: " . $e->getMessage();
+	}
+	
+}
+}
+
+
+
+?>
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
@@ -111,7 +126,7 @@ if ($_POST["pass"] !== $_POST["passConfirm"]) {
 					</div>
 					<span class="passworderror" style="color:red;display:inline;"><?php echo $passworderror; ?></span>
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" name="update">
 							Update Password
 						</button>
 					</div>
