@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
--- https://www.phpmyadmin.net/
+-- version 4.4.15.10
+-- https://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Generation Time: Feb 22, 2020 at 10:44 PM
--- Server version: 10.1.44-MariaDB-0ubuntu0.18.04.1
--- PHP Version: 7.2.24-0ubuntu0.18.04.2
+-- Host: localhost
+-- Generation Time: Feb 23, 2020 at 09:30 PM
+-- Server version: 5.5.64-MariaDB
+-- PHP Version: 5.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,10 +26,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `category_product`
 --
 
-CREATE TABLE `category_product` (
+CREATE TABLE IF NOT EXISTS `category_product` (
   `id` int(11) NOT NULL,
   `category_name` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `category_product`
@@ -44,21 +44,24 @@ INSERT INTO `category_product` (`id`, `category_name`) VALUES
 -- Table structure for table `orders`
 --
 
-CREATE TABLE `orders` (
+CREATE TABLE IF NOT EXISTS `orders` (
   `id` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `total` int(11) NOT NULL,
+  `notes` text,
   `status` varchar(100) NOT NULL DEFAULT '0',
-  `created_at` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `customer_id`, `total`, `status`, `created_at`) VALUES
-(2, 1, 12, 'out for delivery', '2020-02-21'),
-(3, 1, 3, 'done', '2020-02-22');
+INSERT INTO `orders` (`id`, `customer_id`, `total`, `notes`, `status`, `created_at`) VALUES
+(29, 2, 13, '', 'processing', '2020-02-23 19:47:37'),
+(30, 2, 30, '', 'processing', '2020-02-23 20:07:30'),
+(31, 5, 34, '', 'processing', '2020-02-23 20:56:41'),
+(32, 1, 106, 'kkkkkk', 'processing', '2020-02-23 21:19:03');
 
 -- --------------------------------------------------------
 
@@ -66,20 +69,30 @@ INSERT INTO `orders` (`id`, `customer_id`, `total`, `status`, `created_at`) VALU
 -- Table structure for table `order_product`
 --
 
-CREATE TABLE `order_product` (
+CREATE TABLE IF NOT EXISTS `order_product` (
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `number` int(11) NOT NULL,
-  `total_price` int(11) NOT NULL
+  `number` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `order_product`
 --
 
-INSERT INTO `order_product` (`order_id`, `product_id`, `number`, `total_price`) VALUES
-(2, 1, 2, 6),
-(2, 2, 1, 12);
+INSERT INTO `order_product` (`order_id`, `product_id`, `number`) VALUES
+(29, 1, 1),
+(29, 2, 1),
+(29, 3, 1),
+(30, 1, 1),
+(30, 2, 1),
+(30, 5, 1),
+(30, 9, 1),
+(31, 1, 2),
+(31, 2, 2),
+(31, 3, 2),
+(31, 4, 2),
+(32, 1, 25),
+(32, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -87,21 +100,26 @@ INSERT INTO `order_product` (`order_id`, `product_id`, `number`, `total_price`) 
 -- Table structure for table `products`
 --
 
-CREATE TABLE `products` (
+CREATE TABLE IF NOT EXISTS `products` (
   `id` int(11) NOT NULL,
   `product_name` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `image` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `product_name`, `price`, `category_id`, `image`) VALUES
-(1, 'tea', 3, 1, 'tea.jpg'),
-(2, 'Nescafe', 6, 1, 'Nescafe.png');
+(1, 'tea', 4, 1, '../assets/images/products/tea.jpg'),
+(2, 'Nescafe', 6, 1, '../assets/images/products/Nescafe.png'),
+(3, 'coffee', 3, 1, '../assets/images/products/coffee.jpg'),
+(4, 'water', 4, 1, '../assets/images/products/water.jpg\n'),
+(5, 'orange juice', 10, 1, '../assets/images/products/orangeJuice.jfif'),
+(9, 'celery juice', 10, 1, '../assets/images/products/Celery-Juice.jpg'),
+(10, 'CocaCola', 6, 1, '../assets/images/products/cocacola.png');
 
 -- --------------------------------------------------------
 
@@ -109,7 +127,7 @@ INSERT INTO `products` (`id`, `product_name`, `price`, `category_id`, `image`) V
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -118,14 +136,18 @@ CREATE TABLE `users` (
   `profile_path` varchar(255) NOT NULL,
   `room_No` int(11) DEFAULT NULL,
   `Ext` varchar(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `is_admin`, `profile_path`, `room_No`, `Ext`) VALUES
-(1, 'Dalia', 'dalia@yahoo.com', '12345678', 0, '', 1, NULL);
+(1, 'Dalia', 'dalia@yahoo.com', '12345678', 0, '', 1, '11'),
+(2, 'Naguib93', 'm.naguib2611@gmail.com', '123456789', 0, '../assets/images/users/Iua2Z.jpg', 21, '5'),
+(3, 'Mohammed', 'm.naguib26111@gmail.com', '123456789', 1, '../assets/images/users/q31gD.jpg', 20, '123'),
+(5, 'test', 'test@test.com', '123456789', 0, '../assets/images/users/c0ac5.jpg', 15, '14'),
+(6, 'Ali', 'test1@test.com', '123456789', 1, '../assets/images/users/SVcwT.png', 43, '10');
 
 --
 -- Indexes for dumped tables
@@ -179,22 +201,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `category_product`
 --
 ALTER TABLE `category_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- Constraints for dumped tables
 --
