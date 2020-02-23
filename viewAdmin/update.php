@@ -1,7 +1,8 @@
 
-
 <?php
     session_start();
+    include_once "validations/middleware.php";
+
     $id=$_SESSION['id'];
     $servername = "localhost";
     $username = "root";

@@ -30,6 +30,8 @@
 </html>
 <?php
    session_start();
+   include_once "validations/middleware.php";
+
    $id = $_GET['id'];
   $_SESSION['id']=$id; 
  

@@ -8,9 +8,9 @@
 </head>
 
 <body>
-
-
     <?php
+ include_once "validations/middleware.php";
+
     if (isset($_POST["update"])) {
         $updateQuery = "update products set product_name=?,price= ?, category_id=? , image = ? where id = ?";
         $dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";

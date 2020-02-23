@@ -4,13 +4,13 @@ try {
 
     $sql = "INSERT INTO orders (customer_id,total,notes,status) VALUES(?,?,?,?)";
    
-    $stmtInsert= $conn->prepare($sql);
+    $stmtInsert= $pdo->prepare($sql);
     $stmtInsert->execute([$customerSelected,$total,$notes,"processing"]);
-    $ordrId=$conn->lastInsertId();
+    $ordrId=$pdo->lastInsertId();
     if ($ordrId) {
         foreach ($orderObject as $key => $value) {
             $sqlOrderProduct = "INSERT INTO order_product (order_id,product_id,number) VALUES(?,?,?)";
-            $stmtInsertOrderProduct= $conn->prepare($sqlOrderProduct);
+            $stmtInsertOrderProduct= $pdo->prepare($sqlOrderProduct);
             $stmtInsertOrderProduct->execute([$ordrId,$key,$value]);
         }    
     }
