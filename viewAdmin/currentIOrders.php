@@ -9,7 +9,7 @@
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
      <!-- Site Metas -->
-    <title>My Orders</title>  
+    <title>Orders</title>  
     <!-- Site Icons -->
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
@@ -67,7 +67,7 @@
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>My Orders</h1>
+					<h1>Orders</h1>
 				</div>
 			</div>
 		</div>
@@ -81,35 +81,13 @@
                     <div class="col-lg-12">
                         <div class="heading-title text-center">
                             <h2>Orders</h2>
-                            <p>Here you can view and Cancel your orders </p>
+                            <p>Here you can view Current orders </p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <!-- <form id="contactForm" method="post" action="" enctype="multipart/form-data"> -->
                             <div class="row">
-                                <!-- <div class="col-md-5">
-                                    <div class="form-group">
-                                        <h2>Date From : </h2>
-                                        <input type="date" data-format="dd-MM-yyyy" name="dateFrom" class="form-control" >
-                                        <div class="help-block with-errors"></div>
-                                    </div>                                 
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <h2>Date To :</h2>
-                                        <input type="date" class="form-control" data-format="dd-MM-yyyy" name="dateTo">
-                                        <div class="help-block with-errors"></div>
-                                    </div>                                 
-                                </div> -->
-                                <!-- <div class="col-md-2">
-                                    <div class="submit-button text-center" style="display: flex;">
-                                        <button class="btn btn-common"name="submit" type="submit" style="opacity: 1;margin-top: 15px;margin-left: 40px;">Search</button>
-                                        <div id="msgSubmit" style="margin-left: 50px;margin-top: 10px;" class="h3 text-center hidden"></div> 
-                                        <div class="clearfix"></div> 
-                                    </div>
-                                </div> -->
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <table class="table" width="100%" border="1"  >
@@ -123,31 +101,23 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php
-                                        // $dateFrom = $_POST["dateFrom"];
-                                        // $dateTo = $_POST["dateTo"];
+                                        <?php                                        
                                         include("../viewUser/databaseConnection.php");
-                                        $conn = $_SESSION["conn"];
-                                        // var_dump($_SESSION);
+                                        $conn = $_SESSION["conn"];                                        
                                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                         $query = "SELECT * FROM orders WHERE `status` = 'processing'; ";
                                         $stmt = $conn->prepare($query);
                                         $stmt->execute();
-                                        $num = $stmt->rowCount();
-                                        // $row =$stmt->FetchAll(PDO::FETCH_ASSOC);
-                                        echo $num;
-                                        // set the resulting array to associative
-                                        //$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                                        while($row =$stmt->Fetch(PDO::FETCH_ASSOC)) { //var_dump($row);?>
+                                        $num = $stmt->rowCount();                                        
+                                        // echo $num;                                        
+                                        while($row =$stmt->Fetch(PDO::FETCH_ASSOC)) { ?>
                                             
                                             <tr style="font-size:110%"><td align="center"><?php echo $row["created_at"]; ?></td>
                                                                                  
                                             <?php 
                                                 
-                                                $cid = $row["customer_id"];
-                                                // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                                $query1 = "SELECT * FROM users WHERE `id` = '$cid'; ";
-                                                // echo $query1;
+                                                $cid = $row["customer_id"];                                                
+                                                $query1 = "SELECT * FROM users WHERE `id` = '$cid'; ";                                            
                                                 $stmt1 = $conn->prepare($query1);
                                                 $stmt1->execute();
                                                 while($row1 =$stmt1->Fetch(PDO::FETCH_ASSOC)) { ?>
@@ -160,13 +130,15 @@
                                                 <?php } ?>
                                         
                                         </tr>
+                                        <!-- <tr>
+
+                                        </tr> -->
                                         <?php $count++; } ?>
                                         </tbody>
                                         </table>
                                     </div>                                 
                                 </div>
-                            </div>            
-                        <!-- </form> -->
+                            </div>
                     </div>
                 </div>
             </div>
