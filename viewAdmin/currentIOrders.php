@@ -91,8 +91,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <?php                                        
-                                        include("../viewUser/databaseConnection.php");
-                                        $conn = $_SESSION["conn"];                                        
+                                        include_once "databaseQueries/connection.php";                                       
                                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                         $query = "SELECT * FROM orders WHERE `status` = 'processing'; ";
                                         $stmt = $conn->prepare($query);

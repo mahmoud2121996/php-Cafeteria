@@ -4,7 +4,7 @@
 // $servername = "localhost";
 // $username = "root";
 // $password = "";
-// $id = $_GET['id'];
+$id = $_GET['id'];
 echo $id;
     try {
         // $con = new PDO("mysql:host=127.0.0.1;dbname=cafeteria_php;", $username, $password);

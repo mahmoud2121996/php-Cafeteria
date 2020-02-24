@@ -76,7 +76,8 @@ include_once "databaseQueries/connection.php";
                                         <tbody>
                                         <?php                                        
                                         // include("../viewUser/databaseConnection.php");
-                                        // $conn = $_SESSION["conn"];                                        
+                                        // $conn = $_SESSION["conn"]; 
+                                        include_once "databaseQueries/connection.php";                                       
                                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                         $query = "SELECT * FROM orders WHERE `status` = 'processing'; ";
                                         $stmt = $conn->prepare($query);
@@ -106,7 +107,7 @@ include_once "databaseQueries/connection.php";
                                         <!-- <tr>
 
                                         </tr> -->
-                                        <?php $count++; } ?>
+                                        <?php } ?>
                                         </tbody>
                                         </table>
                                     </div>                                 

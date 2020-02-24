@@ -36,12 +36,13 @@
     
      
     try {
-        $con = new PDO("mysql:host=127.0.0.1;dbname=cafeteria_php;", $username, $password);
-        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // $con = new PDO("mysql:host=127.0.0.1;dbname=cafeteria_php;", $username, $password);
+        include_once "databaseQueries/connection.php";
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
        
         $query = "UPDATE users SET name= '$name' , email= '$email',  is_admin='$is_admin' , profile_path='$imgPath' , room_No='$room_No', ext='$ext' where id='$id' ;";
       
-        $pdoResult = $con->prepare($query);
+        $pdoResult = $conn->prepare($query);
         
         $pdoExec = $pdoResult->execute();
         header('Location: view-users.php');
