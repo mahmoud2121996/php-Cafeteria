@@ -90,17 +90,6 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <table class="table" width="100%" border="1"  >
-                                        <thead>
-                                        <tr style="background-color: #d0a772; color: white;font-size:120%" align="center">
-                                        <th ><strong>Date</strong></th>
-                                        <th><strong>Name</strong></th>
-                                        <th><strong>Room</strong></th>
-                                        <th><strong>Ext.</strong></th>
-                                        <th><strong>Action</strong></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
                                         <?php                                        
                                         include("../viewUser/databaseConnection.php");
                                         $conn = $_SESSION["conn"];                                        
@@ -111,6 +100,18 @@
                                         $num = $stmt->rowCount();                                        
                                         // echo $num;                                        
                                         while($row =$stmt->Fetch(PDO::FETCH_ASSOC)) { ?>
+                                            <table class="table" width="100%" border="1"  >
+                                            <thead>
+                                            <tr style="background-color: #d0a772; color: white;font-size:120%" align="center">
+                                            <th ><strong>Date</strong></th>
+                                            <th><strong>Name</strong></th>
+                                            <th><strong>Room</strong></th>
+                                            <th><strong>Ext.</strong></th>
+                                            <th><strong>Action</strong></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
                                             
                                             <tr style="font-size:110%"><td align="center"><?php echo $row["created_at"]; ?></td>
                                                                                  
@@ -130,9 +131,36 @@
                                                 <?php } ?>
                                         
                                         </tr>
-                                        <!-- <tr>
-
-                                        </tr> -->
+                                        <tr>
+                                            <?php
+                                                $orderId = $row["id"]; 
+                                                $query2 = "SELECT * FROM order_product WHERE order_id = $orderId;";
+                                                $stmt2 = $conn->prepare($query2);
+                                                $stmt2->execute();
+                                                $num = $stmt2->rowCount();
+                                                while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+                                                    //for ($i = 0; $i < $num; $i++) {
+                                                        $pro = $row2["product_id"];
+                                                        $query3 = "SELECT * FROM products WHERE id = '$pro'";
+                                                        $stmt3 = $conn->prepare($query3);
+                                                        $stmt3->execute();
+                                                        $row3 = $stmt3->fetch();
+                                                        $amount = $row2["number"];
+                                                        $name = $row3["product_name"];
+                                                        $price = $row3["price"];
+                                                        $img = $row3["image"];
+                                                        ?>
+                                                        <td>
+                                                        <img src=../assets/images/products/<?php echo $img; ?> height='100px' width='100px'>
+                                                        <p> Product: <?php echo $name;?>     Price: <?php echo $price;?> L.E</p>
+                                                        <p> Amount: <?php echo $amount;?>    Total: <?php echo $row2["total_price"]?> L.E </p>
+                                                        <p>  </p>
+                                                        </td>
+                                                        <?php
+                                                    //}
+                                                }
+                                            ?>
+                                        </tr>
                                         <?php $count++; } ?>
                                         </tbody>
                                         </table>
@@ -175,7 +203,7 @@
             $('.deliver').click(function(){
                 var del_id= $(this).attr('id');
                 var $ele = $(this).parent().parent();
-                alert(del_id);
+                // alert(del_id);
                 $.ajax({
                     url:"deliverOrder.php?id="+ del_id,
                 success: function(result){
