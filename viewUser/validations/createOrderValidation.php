@@ -1,6 +1,5 @@
 <?php
 
-var_dump($_POST);
 
 $customerSelected=$_POST['customerSelected'];
 $products=$_POST['products'];

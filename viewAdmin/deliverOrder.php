@@ -1,10 +1,11 @@
 <?php
     // session_start();
-    include("../viewUser/databaseConnection.php");
+    // include("../viewUser/databaseConnection.php");
+    include_once "databaseQueries/connection.php";
     $id = $_REQUEST['id'];
     try 
     {
-        $conn = $_SESSION["conn"];
+        // $conn = $_SESSION["conn"];
         $query = " UPDATE orders SET `status`= 'out for delivery' WHERE id = $id;";
         $stmt = $conn->prepare($query);
         $stmt->execute();

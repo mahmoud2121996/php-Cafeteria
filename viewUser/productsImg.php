@@ -1,10 +1,15 @@
 <?php
     // session_start();
     $id = $_GET['id'];
-    include("databaseConnection.php");
+    $db_config = parse_ini_file('../config.sample.ini');
+    $conn = new PDO("mysql:dbname={$db_config['db_name']};".
+                        "host={$db_config['db_host']};".
+                        "port={$db_config['db_port']};",
+                        $db_config['db_user'],
+                        $db_config['db_pass']);
     
     try {
-        $conn = $_SESSION["conn"];
+        // $conn = $_SESSION["conn"];
         // $conn = new PDO($dsn, $user, $pass);
         // echo $conn;
         $query = "SELECT * FROM order_product WHERE order_id = '$id';";

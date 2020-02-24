@@ -1,12 +1,13 @@
 <?php
-include_once "connection.php";
-$stmAllProduct = $pdo->query("SELECT * FROM products;");
+$db_config = parse_ini_file('../config.sample.ini');
+$conn = new PDO("mysql:dbname={$db_config['db_name']};".
+                        "host={$db_config['db_host']};".
+                        "port={$db_config['db_port']};",
+                        $db_config['db_user'],
+                        $db_config['db_pass']);
+
+$stmAllProduct = $conn->query("SELECT * FROM products;");
 $productsAll = $stmAllProduct->fetchAll(PDO::FETCH_NUM);
 
-
-// foreach ($productsAll as $customer) {
-//    echo $customer[0]."</br>";
-//    echo $customer[1]."</br>";
-// }
 
 ?>

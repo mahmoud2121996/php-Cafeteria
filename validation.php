@@ -21,12 +21,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($selectFlag === 1) {
         try {
-            $dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";
-            $dbUser = "dalia";
-            $dbPassword = "123";
-            $db = new PDO($dbn, $dbUser, $dbPassword);
+            $db_config = parse_ini_file('config.sample.ini');
+            $conn = new PDO("mysql:dbname={$db_config['db_name']};".
+                                    "host={$db_config['db_host']};".
+                                    "port={$db_config['db_port']};",
+                                    $db_config['db_user'],
+                                    $db_config['db_pass']);
             $selectQuery = " SELECT * from users where email = ? and password = ?";
-            $results = $db->prepare($selectQuery);
+            $results = $conn->prepare($selectQuery);
             $results->execute([$userEmail, $userPassword]);
             if ($results = $results->fetch()) {
                 if ($results["email"] == $userEmail && $results["password"]) {

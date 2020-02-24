@@ -36,28 +36,7 @@
 
 <body>
 	<!-- Start header -->
-	<header class="top-navbar">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class="container">
-				<a class="navbar-brand" href="index.html">
-					<img src="images/logo.png" alt="" />
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbars-rs-food">
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Products</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Users</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Manual Order</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Checks</a></li>
-						<li class="nav-item"><img src="../assets/images/users/220px-User_icon_2.svg.png" width="50" height="50" style="border-radius:50%;  "></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
+		<?php include_once "navBar/navBar.php"  ?> 
 	<!-- End header -->
 
 	<!-- Start All Pages -->
@@ -98,20 +77,21 @@
 						</thead>
 						<tbody>
 							<?php
-							$dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";
-							$dbUser = "root";
-							$dbPassword = "";
+							// $dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";
+							// $dbUser = "root";
+							// $dbPassword = "";
 							try {
-								$db = new PDO($dbn, $dbUser, $dbPassword);
+								// $db = new PDO($dbn, $dbUser, $dbPassword);
+								include_once "databaseQueries/connection.php";
 								$selectQuery = "select * from products";
-								$results = $db->query($selectQuery);
+								$results = $conn->query($selectQuery);
 								while ($row = $results->fetch()) {
 									echo "<tr>
 											<td>" . $row["id"] . "</td>
 											<td>" . $row["product_name"] . "</td>
 											<td>" . $row["price"] . "</td>
 											<td>" . $row["category_id"] . "</td>
-											<td> <img src='" . $row["profile_path"] . "' width='50px' height='50px'></td>
+											<td> <img src='" . $row["image"] . "' width='50px' height='50px'></td>
 											<td><a href='deleteProducts.php?id=" . $row["id"] . "' >delete</a> 
 											<a href='updateProduct.php?id=" . $row["id"] . "' >update</a>
 											</td>

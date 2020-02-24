@@ -9,13 +9,15 @@
 
 <body>
     <?php
- include_once "validations/middleware.php";
+
+session_start();
+include_once "validations/middleware.php";
 
     if (isset($_POST["update"])) {
         $updateQuery = "update products set product_name=?,price= ?, category_id=? , image = ? where id = ?";
-        $dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";
-        $dbUser = "root";
-        $dbPassword = "";
+        // $dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";
+        // $dbUser = "root";
+        // $dbPassword = "";
 
         $productId = $_POST["id"];
         $productName = $_POST["product_name"];
@@ -44,8 +46,9 @@
 
 
         try {
-            $db = new PDO($dbn, $dbUser, $dbPassword);
-            if ($db->prepare($updateQuery)->execute([$productName, $productPrice, $categoryId, $productImage, $productId])) {
+            // $db = new PDO($dbn, $dbUser, $dbPassword);
+            include_once "databaseQueries/connection.php";
+            if ($conn->prepare($updateQuery)->execute([$productName, $productPrice, $categoryId, $productImage, $productId])) {
                 echo "updated...";
             } else {
                 echo "not updated...";
@@ -57,12 +60,13 @@
         }
     } else {
         $selectQuery = "select * from products where id = ?";
-        $dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";
-        $dbUser = "root";
-        $dbPassword = "";
+        // $dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";
+        // $dbUser = "root";
+        // $dbPassword = "";
         try {
-            $db = new PDO($dbn, $dbUser, $dbPassword);
-            $results = $db->prepare($selectQuery);
+            // $db = new PDO($dbn, $dbUser, $dbPassword);
+            include_once "databaseQueries/connection.php";
+            $results = $conn->prepare($selectQuery);
             $results->execute([$_GET["id"]]);
             $row = $results->fetch();
 

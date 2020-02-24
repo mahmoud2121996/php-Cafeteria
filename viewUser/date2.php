@@ -1,5 +1,6 @@
 <?php
-// session_start();
+session_start();
+include_once "validations/middleware.php";
 ?>
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
@@ -92,8 +93,12 @@
                                         <?php
                                         $dateFrom = $_POST["dateFrom"];
                                         $dateTo = $_POST["dateTo"];
-                                        include("databaseConnection.php");
-                                        $conn = $_SESSION["conn"];
+                                        $db_config = parse_ini_file('config.sample.ini');
+                                        $conn = new PDO("mysql:dbname={$db_config['db_name']};".
+                                                                "host={$db_config['db_host']};".
+                                                                "port={$db_config['db_port']};",
+                                                                $db_config['db_user'],
+                                                                $db_config['db_pass']);
                                         $_SESSION["dateFrom"] = $dateFrom;
                                         $_SESSION["dateTo"] = $dateTo;
                                         // $conn = new PDO($dsn , $user, $pass);
