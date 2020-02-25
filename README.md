@@ -17,12 +17,12 @@ then can use login.php to login to system.
 
 ## Built With
 
-*[php](https://www.php.net/docs.php) - PHP:Hypertext Preprocess.
-*[HTML](https://html.com/) - Hypertext Markup Language.
-*[CSS](https://devdocs.io/css/) - Cascading Style Sheets.
-*[Bootstrap](https://getbootstrap.com/) - CSS framework.
-*[javaScript](https://javascript.info) - interpreted,programming language.
-*[ajax](https://api.jquery.com/jquery.ajax/) - javaScript framework.
+* [php](https://www.php.net/docs.php) - PHP:Hypertext Preprocess.
+* [HTML](https://html.com/) - Hypertext Markup Language.
+* [CSS](https://devdocs.io/css/) - Cascading Style Sheets.
+* [Bootstrap](https://getbootstrap.com/) - CSS framework.
+* [javaScript](https://javascript.info) - interpreted,programming language.
+* [ajax](https://api.jquery.com/jquery.ajax/) - javaScript framework.
 
 ## Authors
 
