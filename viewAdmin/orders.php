@@ -15,7 +15,7 @@ include_once "databaseQueries/connection.php";
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
      <!-- Site Metas -->
-    <title>Ordersssss</title>  
+    <title>Orders</title>  
     <!-- Site Icons -->
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
@@ -71,7 +71,7 @@ include_once "databaseQueries/connection.php";
                                         $num = $stmt->rowCount();                                        
                                         // echo $num;                                        
                                         while($row =$stmt->Fetch(PDO::FETCH_ASSOC)) { ?>
-                                            <table class="table" width="100%" border="1" style="margin: 0%;" >
+                                            <table id="hhh" class="table" width="100%" border="1" style="margin: 0%;" >
                                             <thead>
                                             <tr style="background-color: #d0a772; color: white;font-size:120%" align="center">
                                             <th ><strong>Date</strong></th>
@@ -96,7 +96,7 @@ include_once "databaseQueries/connection.php";
                                                         <td align="center"><?php echo $row1["room_No"]; ?></td>
                                                         <td align="center"><?php echo $row1["Ext"]; ?></td>
                                                         <td align="center">
-                                                        <a class="deliver" href="#" id=<?php echo $row["id"]; ?>>Deliver</a>
+                                                        <a class="btn-success rounded p-2 deliver"  id=<?php echo $row["id"]; ?>>Deliver</a>
                                                         </td>
                                                 <?php } ?>
                                             </tr>
@@ -151,7 +151,6 @@ include_once "databaseQueries/connection.php";
 	
 
 	
-	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
 <!--===============================================================================================-->
 <script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -174,21 +173,24 @@ include_once "databaseQueries/connection.php";
     
     <!--===============================================================================================-->
     <script src="../assets/js/main.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
     <script>    
             $('.deliver').click(function(){
                 var del_id= $(this).attr('id');
-                var $ele = $(this).parent().parent();
-                // alert(del_id);
+                var $ele = $(this).parent().parent().parent().parent();
+                // $ele.next().remove();
+                // $ele.remove();
+              
+                
                 $.ajax({
                     url:"deliverOrder.php?id="+ del_id,
                 success: function(result){
+                        $ele.next().remove();
                         $ele.remove();
                         alert("Order out for delivery");
-                }
-
-                    })
-                    })
+                    }
+                });
+            });
                 
     </script>
 </html>
