@@ -95,23 +95,13 @@ $loggedId = $_SESSION["loggedId"];
                                         <?php
                                         $dateFrom = $_POST["dateFrom"];
                                         $dateTo = $_POST["dateTo"];
-                                        // $db_config = parse_ini_file('../config.sample.ini');
-                                        // $conn = new PDO("mysql:dbname={$db_config['db_name']};".
-                                        // "host={$db_config['db_host']};".
-                                        // "port={$db_config['db_port']};",
-                                        // $db_config['db_user'],
-                                        // $db_config['db_pass']);
                                         include_once "databaseQueries/connection.php";
                                         $_SESSION["dateFrom"] = $dateFrom;
                                         $_SESSION["dateTo"] = $dateTo;
-                                        // $conn = new PDO($dsn , $user, $pass);
                                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                         $query = "SELECT * FROM orders WHERE customer_id = $loggedId AND created_at BETWEEN '$dateFrom' AND '$dateTo' OR created_at BETWEEN '$dateTo' AND '$dateFrom'; ";
                                         $stmt = $conn->prepare($query);
                                         $stmt->execute();
-
-                                        // set the resulting array to associative
-                                        //$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
                                         while($row =$stmt->Fetch(PDO::FETCH_ASSOC)) { ?>
                                         <tr style="font-size:110%"><td align="center"><?php echo $row["created_at"]; ?></td>
                                         <td align="center">
