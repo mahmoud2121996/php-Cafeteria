@@ -201,7 +201,7 @@ include_once "databaseQueries/connection.php";
 
             $('.done').click(function(){
                 var del_id= $(this).attr('id');
-                var $ele = $(this).parent().parent().parent();
+                var $ele = $(this).parent().parent().parent().parent();
                 // alert(del_id);
                 $.ajax({
                     url:"doneOrder.php?id="+ del_id,
