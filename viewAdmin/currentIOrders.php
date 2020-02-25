@@ -139,6 +139,7 @@
                                                         $stmt2 = $conn->prepare($query2);
                                                         $stmt2->execute();
                                                         $num = $stmt2->rowCount();
+                                                        //Adding proucts Details Rows
                                                         while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
                                                             //for ($i = 0; $i < $num; $i++) {
                                                                 $pro = $row2["product_id"];
