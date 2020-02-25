@@ -54,7 +54,7 @@ include_once "validations/middleware.php";
                 echo "not updated...";
             }
 
-            header('Location: viewProduct.php');
+            header('Location: productAll.php');
         } catch (\Throwable $th) {
             //throw $th;
         }

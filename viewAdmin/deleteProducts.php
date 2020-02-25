@@ -8,7 +8,7 @@ try {
     // $db = new PDO($dbn, $dbUser, $dbPassword);
     include_once "databaseQueries/connection.php";
     $conn->prepare($deleteQuery)->execute([$_GET['id']]);
-    header('Location: viewProduct.php');
+    header('Location: productAll.php');
 } catch (\Throwable $th) {
     //throw $th;
 }

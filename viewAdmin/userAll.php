@@ -1,6 +1,7 @@
 <?php
 session_start();
  include_once "validations/middleware.php";
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">

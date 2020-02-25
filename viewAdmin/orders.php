@@ -4,7 +4,6 @@ include_once "validations/middleware.php";
 include_once "databaseQueries/connection.php";
 
 ?>
-
 <?php
 // session_start();
 ?>
@@ -32,7 +31,7 @@ include_once "databaseQueries/connection.php";
 </head>
 <body>
 	<!-- Start header -->
-    <?php include_once "navBar/navBar.php"  ?> 
+	<?php include_once "navBar/navBar.php"  ?> 
 	<!-- End header -->
 	
 	<!-- Start All Pages -->
@@ -63,20 +62,7 @@ include_once "databaseQueries/connection.php";
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <table class="table" width="100%" border="1"  >
-                                        <thead>
-                                        <tr style="background-color: #d0a772; color: white;font-size:120%" align="center">
-                                        <th ><strong>Date</strong></th>
-                                        <th><strong>Name</strong></th>
-                                        <th><strong>Room</strong></th>
-                                        <th><strong>Ext.</strong></th>
-                                        <th><strong>Action</strong></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
                                         <?php                                        
-                                        // include("../viewUser/databaseConnection.php");
-                                        // $conn = $_SESSION["conn"]; 
                                         include_once "databaseQueries/connection.php";                                       
                                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                         $query = "SELECT * FROM orders WHERE `status` = 'processing'; ";
@@ -85,29 +71,73 @@ include_once "databaseQueries/connection.php";
                                         $num = $stmt->rowCount();                                        
                                         // echo $num;                                        
                                         while($row =$stmt->Fetch(PDO::FETCH_ASSOC)) { ?>
+                                            <table id="hhh" class="table" width="100%" border="1" style="margin: 0%;" >
+                                            <thead>
+                                            <tr style="background-color: #d0a772; color: white;font-size:120%" align="center">
+                                            <th ><strong>Date</strong></th>
+                                            <th><strong>Name</strong></th>
+                                            <th><strong>Room</strong></th>
+                                            <th><strong>Ext.</strong></th>
+                                            <th><strong>Action</strong></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
                                             
-                                            <tr style="font-size:110%"><td align="center"><?php echo $row["created_at"]; ?></td>
-                                                                                 
-                                            <?php 
-                                                
-                                                $cid = $row["customer_id"];                                                
-                                                $query1 = "SELECT * FROM users WHERE `id` = '$cid'; ";                                            
-                                                $stmt1 = $conn->prepare($query1);
-                                                $stmt1->execute();
-                                                while($row1 =$stmt1->Fetch(PDO::FETCH_ASSOC)) { ?>
-                                                    <td align="center"><?php echo $row1["name"]; ?></td>
-                                                    <td align="center"><?php echo $row1["room_No"]; ?></td>
-                                                    <td align="center"><?php echo $row1["Ext"]; ?></td>
-                                                    <td align="center">
-                                                    <a class="deliver" href="#" id=<?php echo $row["id"]; ?>>Deliver</a>
-                                                    </td>
+                                            <tr style="font-size:110%;">
+                                                <td align="center"><?php echo $row["created_at"]; ?></td>
+                                                <?php 
+                                                    
+                                                    $cid = $row["customer_id"];                                                
+                                                    $query1 = "SELECT * FROM users WHERE `id` = '$cid'; ";                                            
+                                                    $stmt1 = $conn->prepare($query1);
+                                                    $stmt1->execute();
+                                                    while($row1 =$stmt1->Fetch(PDO::FETCH_ASSOC)) { ?>
+                                                        <td align="center"><?php echo $row1["name"]; ?></td>
+                                                        <td align="center"><?php echo $row1["room_No"]; ?></td>
+                                                        <td align="center"><?php echo $row1["Ext"]; ?></td>
+                                                        <td align="center">
+                                                        <a class="btn-success rounded p-2 deliver"  id=<?php echo $row["id"]; ?>>Deliver</a>
+                                                        </td>
                                                 <?php } ?>
-                                        
-                                        </tr>
-                                        <!-- <tr>
+                                            </tr>
 
-                                        </tr> -->
-                                        <?php } ?>
+                                            <tr>
+                                                <table class="table" width="100%" style="border-style: solid;border-width: 1px;">
+                                                <tbody>
+                                                <tr style="display:flex;justify-content:space-evenly;margin-top:30px;">
+                                                    <?php
+                                                        $orderId = $row["id"]; 
+                                                        $query2 = "SELECT * FROM order_product WHERE order_id = $orderId;";
+                                                        $stmt2 = $conn->prepare($query2);
+                                                        $stmt2->execute();
+                                                        $num = $stmt2->rowCount();
+                                                        while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+                                                            //for ($i = 0; $i < $num; $i++) {
+                                                                $pro = $row2["product_id"];
+                                                                $query3 = "SELECT * FROM products WHERE id = '$pro'";
+                                                                $stmt3 = $conn->prepare($query3);
+                                                                $stmt3->execute();
+                                                                $row3 = $stmt3->fetch();
+                                                                $amount = $row2["number"];
+                                                                $name = $row3["product_name"];
+                                                                $price = $row3["price"];
+                                                                $img = $row3["image"];
+                                                                ?>
+                                                                <td align="center">
+                                                                    <img src=<?php echo $img; ?> height='100px' width='100px'>
+                                                                    <p><strong> Product : </strong> <?php echo $name;?>     <strong>Price : </strong><?php echo $price;?> L.E</p>
+                                                                    <p><strong>Amount : </strong><?php echo $amount;?>    <strong>Total : </strong><?php echo $row2["total_price"]?> L.E </p>
+                                                                    <p>  </p>
+                                                                </td>
+                                                                <?php
+                                                            //}
+                                                        }
+                                                    ?>
+                                                </tr>
+                                                </tbody>    
+                                                </table>    
+                                            </tr>
+                                        <?php $count++; } ?>
                                         </tbody>
                                         </table>
                                     </div>                                 
@@ -121,7 +151,6 @@ include_once "databaseQueries/connection.php";
 	
 
 	
-	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
 <!--===============================================================================================-->
 <script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -144,21 +173,24 @@ include_once "databaseQueries/connection.php";
     
     <!--===============================================================================================-->
     <script src="../assets/js/main.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
     <script>    
             $('.deliver').click(function(){
                 var del_id= $(this).attr('id');
-                var $ele = $(this).parent().parent();
-                alert(del_id);
+                var $ele = $(this).parent().parent().parent().parent();
+                // $ele.next().remove();
+                // $ele.remove();
+              
+                
                 $.ajax({
                     url:"deliverOrder.php?id="+ del_id,
                 success: function(result){
+                        $ele.next().remove();
                         $ele.remove();
                         alert("Order out for delivery");
-                }
-
-                    })
-                    })
+                    }
+                });
+            });
                 
     </script>
 </html>

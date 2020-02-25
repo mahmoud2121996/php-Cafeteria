@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once "validations/middleware.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -169,19 +168,28 @@ include_once "validations/middleware.php";
 
 	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
-	<!-- ALL JS FILES -->
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<!-- ALL PLUGINS -->
-
-	<script src="js/jquery.superslides.min.js"></script>
-	<script src="js/images-loded.min.js"></script>
-	<script src="js/isotope.min.js"></script>
-	<script src="js/baguetteBox.min.js"></script>
-	<script src="js/form-validator.min.js"></script>
-	<script src="js/contact-form-script.js"></script>
-	<script src="js/custom.js"></script>
+<!--===============================================================================================-->
+<script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../assets/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../assets/vendor/bootstrap/js/popper.js"></script>
+	<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../assets/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../assets/vendor/daterangepicker/moment.min.js"></script>
+	<script src="../assets/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../assets/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+   
+    <script src="../assets/js/TemplateJS/form-validator.min.js"></script>
+    <!-- <script src="../assets/js/TemplateJS/contact-form-script.js"></script> -->
+    
+    <!--===============================================================================================-->
+    <script src="../assets/js/main.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </body>
 
 </html>
