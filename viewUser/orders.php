@@ -61,14 +61,14 @@ $loggedId = $_SESSION["loggedId"];
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <h2>Date From : </h2>
-                                        <input type="date" data-format="dd-MM-yyyy" name="dateFrom" class="form-control" >
+                                        <input type="date" data-format="yyyy-MM-dd" name="dateFrom" class="form-control" >
                                         <div class="help-block with-errors"></div>
                                     </div>                                 
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <h2>Date To :</h2>
-                                        <input type="date" class="form-control" data-format="dd-MM-yyyy" name="dateTo">
+                                        <input type="date" class="form-control" data-format="yyyy-MM-dd" name="dateTo">
                                         <div class="help-block with-errors"></div>
                                     </div>                                 
                                 </div>

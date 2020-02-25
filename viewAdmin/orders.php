@@ -15,7 +15,7 @@ include_once "databaseQueries/connection.php";
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
      <!-- Site Metas -->
-    <title>Ordersssss</title>  
+    <title>Orders</title>  
     <!-- Site Icons -->
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
@@ -65,7 +65,7 @@ include_once "databaseQueries/connection.php";
                                         <?php                                        
                                         include_once "databaseQueries/connection.php";                                       
                                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                        $query = "SELECT * FROM orders WHERE `status` = 'processing'; ";
+                                        $query = "SELECT * FROM orders WHERE `status` = 'processing' OR `status` = 'out for delivery'; ";
                                         $stmt = $conn->prepare($query);
                                         $stmt->execute();
                                         $num = $stmt->rowCount();                                        
@@ -78,6 +78,7 @@ include_once "databaseQueries/connection.php";
                                             <th><strong>Name</strong></th>
                                             <th><strong>Room</strong></th>
                                             <th><strong>Ext.</strong></th>
+                                            <th><strong>Total Price</strong></th>
                                             <th><strong>Action</strong></th>
                                             </tr>
                                             </thead>
@@ -94,9 +95,17 @@ include_once "databaseQueries/connection.php";
                                                     while($row1 =$stmt1->Fetch(PDO::FETCH_ASSOC)) { ?>
                                                         <td align="center"><?php echo $row1["name"]; ?></td>
                                                         <td align="center"><?php echo $row1["room_No"]; ?></td>
-                                                        <td align="center"><?php echo $row1["Ext"]; ?></td>
+                                                        <td align="center"><?php echo $row1["Ext"]; ?></td> 
+                                                        <td align="center"><?php echo $row["total"] ?> </td>
                                                         <td align="center">
-                                                        <a class="deliver" href="#" id=<?php echo $row["id"]; ?>>Deliver</a>
+                                                            <?php
+                                                                if($row["status"] != "out for delivery") 
+                                                                {
+                                                            ?>
+                                                        <a class="deliver" href="#" id=<?php echo $row["id"]; ?>>Out for Delivery</a>
+                                                        <br>
+                                                                <?php } ?>
+                                                        <a class="done" href="#" id=<?php echo $row["id"]; ?>>Done</a>
                                                         </td>
                                                 <?php } ?>
                                             </tr>
@@ -126,7 +135,7 @@ include_once "databaseQueries/connection.php";
                                                                 <td align="center">
                                                                     <img src=<?php echo $img; ?> height='100px' width='100px'>
                                                                     <p><strong> Product : </strong> <?php echo $name;?>     <strong>Price : </strong><?php echo $price;?> L.E</p>
-                                                                    <p><strong>Amount : </strong><?php echo $amount;?>    <strong>Total : </strong><?php echo $row2["total_price"]?> L.E </p>
+                                                                    <p><strong>Amount : </strong><?php echo $amount;?>    <strong>Total : </strong><?php echo $amount*$price?> L.E </p>
                                                                     <p>  </p>
                                                                 </td>
                                                                 <?php
@@ -134,8 +143,8 @@ include_once "databaseQueries/connection.php";
                                                         }
                                                     ?>
                                                 </tr>
-                                                </tbody>    
-                                                </table>    
+                                            </tbody>    
+                                        </table> 
                                             </tr>
                                         <?php $count++; } ?>
                                         </tbody>
@@ -183,8 +192,22 @@ include_once "databaseQueries/connection.php";
                 $.ajax({
                     url:"deliverOrder.php?id="+ del_id,
                 success: function(result){
-                        $ele.remove();
+                        // $ele.remove();
                         alert("Order out for delivery");
+                }
+
+                    })
+                    })
+
+            $('.done').click(function(){
+                var del_id= $(this).attr('id');
+                var $ele = $(this).parent().parent();
+                // alert(del_id);
+                $.ajax({
+                    url:"deliverOrder.php?id="+ del_id,
+                success: function(result){
+                        $ele.remove();
+                        alert("Order Done");
                 }
 
                     })
