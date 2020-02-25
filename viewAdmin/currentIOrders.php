@@ -99,7 +99,7 @@
                                         $num = $stmt->rowCount();                                        
                                         // echo $num;                                        
                                         while($row =$stmt->Fetch(PDO::FETCH_ASSOC)) { ?>
-                                            <table class="table" width="100%" border="1"  >
+                                            <table class="table" width="100%" border="1" style="margin: 0%;" >
                                             <thead>
                                             <tr style="background-color: #d0a772; color: white;font-size:120%" align="center">
                                             <th ><strong>Date</strong></th>
@@ -110,56 +110,61 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-
                                             
-                                            <tr style="font-size:110%"><td align="center"><?php echo $row["created_at"]; ?></td>
-                                                                                 
-                                            <?php 
-                                                
-                                                $cid = $row["customer_id"];                                                
-                                                $query1 = "SELECT * FROM users WHERE `id` = '$cid'; ";                                            
-                                                $stmt1 = $conn->prepare($query1);
-                                                $stmt1->execute();
-                                                while($row1 =$stmt1->Fetch(PDO::FETCH_ASSOC)) { ?>
-                                                    <td align="center"><?php echo $row1["name"]; ?></td>
-                                                    <td align="center"><?php echo $row1["room_No"]; ?></td>
-                                                    <td align="center"><?php echo $row1["Ext"]; ?></td>
-                                                    <td align="center">
-                                                    <a class="deliver" href="#" id=<?php echo $row["id"]; ?>>Deliver</a>
-                                                    </td>
-                                                <?php } ?>
-                                        
-                                        </tr>
-                                        <tr>
-                                            <?php
-                                                $orderId = $row["id"]; 
-                                                $query2 = "SELECT * FROM order_product WHERE order_id = $orderId;";
-                                                $stmt2 = $conn->prepare($query2);
-                                                $stmt2->execute();
-                                                $num = $stmt2->rowCount();
-                                                while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-                                                    //for ($i = 0; $i < $num; $i++) {
-                                                        $pro = $row2["product_id"];
-                                                        $query3 = "SELECT * FROM products WHERE id = '$pro'";
-                                                        $stmt3 = $conn->prepare($query3);
-                                                        $stmt3->execute();
-                                                        $row3 = $stmt3->fetch();
-                                                        $amount = $row2["number"];
-                                                        $name = $row3["product_name"];
-                                                        $price = $row3["price"];
-                                                        $img = $row3["image"];
-                                                        ?>
-                                                        <td>
-                                                        <img src=../assets/images/products/<?php echo $img; ?> height='100px' width='100px'>
-                                                        <p> Product: <?php echo $name;?>     Price: <?php echo $price;?> L.E</p>
-                                                        <p> Amount: <?php echo $amount;?>    Total: <?php echo $row2["total_price"]?> L.E </p>
-                                                        <p>  </p>
+                                            <tr style="font-size:110%;">
+                                                <td align="center"><?php echo $row["created_at"]; ?></td>
+                                                <?php 
+                                                    
+                                                    $cid = $row["customer_id"];                                                
+                                                    $query1 = "SELECT * FROM users WHERE `id` = '$cid'; ";                                            
+                                                    $stmt1 = $conn->prepare($query1);
+                                                    $stmt1->execute();
+                                                    while($row1 =$stmt1->Fetch(PDO::FETCH_ASSOC)) { ?>
+                                                        <td align="center"><?php echo $row1["name"]; ?></td>
+                                                        <td align="center"><?php echo $row1["room_No"]; ?></td>
+                                                        <td align="center"><?php echo $row1["Ext"]; ?></td>
+                                                        <td align="center">
+                                                        <a class="deliver" href="#" id=<?php echo $row["id"]; ?>>Deliver</a>
                                                         </td>
-                                                        <?php
-                                                    //}
-                                                }
-                                            ?>
-                                        </tr>
+                                                <?php } ?>
+                                            </tr>
+
+                                            <tr>
+                                                <table class="table" width="100%" style="border-style: solid;border-width: 1px;">
+                                                <tbody>
+                                                <tr style="display:flex;justify-content:space-evenly;margin-top:30px;">
+                                                    <?php
+                                                        $orderId = $row["id"]; 
+                                                        $query2 = "SELECT * FROM order_product WHERE order_id = $orderId;";
+                                                        $stmt2 = $conn->prepare($query2);
+                                                        $stmt2->execute();
+                                                        $num = $stmt2->rowCount();
+                                                        while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+                                                            //for ($i = 0; $i < $num; $i++) {
+                                                                $pro = $row2["product_id"];
+                                                                $query3 = "SELECT * FROM products WHERE id = '$pro'";
+                                                                $stmt3 = $conn->prepare($query3);
+                                                                $stmt3->execute();
+                                                                $row3 = $stmt3->fetch();
+                                                                $amount = $row2["number"];
+                                                                $name = $row3["product_name"];
+                                                                $price = $row3["price"];
+                                                                $img = $row3["image"];
+                                                                ?>
+                                                                <td align="center">
+                                                                    <img src=../assets/images/products/<?php echo $img; ?> height='100px' width='100px'>
+                                                                    <p><strong> Product : </strong> <?php echo $name;?>     <strong>Price : </strong><?php echo $price;?> L.E</p>
+                                                                    <p><strong>Amount : </strong><?php echo $amount;?>    <strong>Total : </strong><?php echo $row2["total_price"]?> L.E </p>
+                                                                    <p>  </p>
+                                                                </td>
+                                                                <?php
+                                                            //}
+                                                        }
+                                                    ?>
+                                                </tr>
+                                                </tbody>    
+                                                </table>    
+                                            </tr>
                                         <?php $count++; } ?>
                                         </tbody>
                                         </table>
