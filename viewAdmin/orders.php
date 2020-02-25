@@ -71,7 +71,7 @@ include_once "databaseQueries/connection.php";
                                         $num = $stmt->rowCount();                                        
                                         // echo $num;                                        
                                         while($row =$stmt->Fetch(PDO::FETCH_ASSOC)) { ?>
-                                            <table class="table" width="100%" border="1" style="margin: 0%;" >
+                                            <table id="hhh" class="table" width="100%" border="1" style="margin: 0%;" >
                                             <thead>
                                             <tr style="background-color: #d0a772; color: white;font-size:120%" align="center">
                                             <th ><strong>Date</strong></th>
@@ -160,7 +160,6 @@ include_once "databaseQueries/connection.php";
 	
 
 	
-	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
 <!--===============================================================================================-->
 <script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -183,12 +182,13 @@ include_once "databaseQueries/connection.php";
     
     <!--===============================================================================================-->
     <script src="../assets/js/main.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
     <script>    
             $('.deliver').click(function(){
                 var del_id= $(this).attr('id');
-                var $ele = $(this).parent().parent();
-                // alert(del_id);
+                var $ele = $(this).parent().parent().parent().parent();
+                // $ele.next().remove();
+                // $ele.remove();  
                 $.ajax({
                     url:"deliverOrder.php?id="+ del_id,
                 success: function(result){
@@ -201,11 +201,12 @@ include_once "databaseQueries/connection.php";
 
             $('.done').click(function(){
                 var del_id= $(this).attr('id');
-                var $ele = $(this).parent().parent();
+                var $ele = $(this).parent().parent().parent();
                 // alert(del_id);
                 $.ajax({
-                    url:"deliverOrder.php?id="+ del_id,
+                    url:"doneOrder.php?id="+ del_id,
                 success: function(result){
+                        $ele.next().remove();
                         $ele.remove();
                         alert("Order Done");
                 }

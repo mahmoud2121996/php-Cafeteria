@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once "randomString.php";
-var_dump($_FILES);
+// var_dump($_FILES);
 $name = $_POST['name'];
 $email = $_POST['email'];
 $pass = $_POST['pass'];
@@ -79,7 +79,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     
       // echo "<h2>User Added successfully</h2>";
       include_once "../databaseQueries/insert.php";
-     header("refresh:1; url=../userAll.php");
+     header("location:../userAll.php");
   }else {
     header("refresh:2; url=../userAdd.php");
   }

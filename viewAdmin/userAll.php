@@ -1,6 +1,7 @@
 <?php
 session_start();
  include_once "validations/middleware.php";
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,13 +33,10 @@ session_start();
 
   <body>
     <?php
-    // $servername = "localhost";
-    // $username = "root";
-    // $password = "";
+   
 
     try {
-      // $conn = new PDO("mysql:host=127.0.0.1;dbname=cafeteria_php;", $username, $password);
-      // set the PDO error mode to exception
+
       include_once "databaseQueries/connection.php";
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       echo "Connected successfully";
@@ -95,7 +93,7 @@ session_start();
 
                     echo "<td><a class=\"btn btn-danger\" href=\"delete.php?id=" . $row['id'] . "\">Delete</a>
                      
-                    <a class=\"btn btn-primary\" href=\"update1.php?id=" . $row['id'] . "\">Update</a></td>";
+                    <a class=\"btn btn-primary\" href=\"update.php?id=" . $row['id'] . "\">Update</a></td>";
                     echo "</tr>";
                     echo "</tbody>";
                   }
