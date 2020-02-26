@@ -91,9 +91,9 @@ session_start();
                     echo "<td>" . $row['room_No'] . "<br>" . "</td>";
                     echo "<td>" . $row['Ext'] . "<br>" . "</td>";
 
-                    echo "<td><a class=\"btn btn-danger\" href=\"delete.php?id=" . $row['id'] . "\">Delete</a>
+                    echo "<td><a btn p-1 m-0 rounded class=\"btn btn-danger\" href=\"delete.php?id=" . $row['id'] . "\"><strong>DELETE</strong></a>
                      
-                    <a class=\"btn btn-primary\" href=\"update2.php?id=" . $row['id'] . "\">Update</a></td>";
+                    <a class=\"btn p-1 m-1 rounded btn-primary\" href=\"update2.php?id=" . $row['id'] . "\"><strong>UPDATE</strong></a></td>";
                     echo "</tr>";
                     echo "</tbody>";
                   }
