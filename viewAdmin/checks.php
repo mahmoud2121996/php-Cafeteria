@@ -1,3 +1,8 @@
+<?php
+session_start();
+include_once "validations/middleware.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,14 +89,9 @@
                                     <label for="users">users : </label>
                                     <select name="users" id="">
                                         <?php
-                                        $selectQuery = "select * from users";
-                                        $dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";
-                                        $dbUser = "root";
-                                        $dbPassword = "";
-                                        $divCount = 0;
+                                        include_once "databaseQueries/connection.php";
                                         try {
-                                            $db = new PDO($dbn, $dbUser, $dbPassword);
-                                            $results = $db->query($selectQuery);
+                                            $results = $conn->query($selectQuery);
                                             echo "<option value='all'>all users</option>";
 
                                             while ($row = $results->fetch()) {
@@ -127,8 +127,8 @@
                                                             $selectQuery = "SELECT users.name , orders.customer_id , SUM(total) as amount FROM orders JOIN users on users.id = orders.customer_id where users.name='" . $_POST["users"] . "' GROUP by orders.customer_id";
                                                         }
                                                     }
-                                                    $db = new PDO($dbn, $dbUser, $dbPassword);
-                                                    $results = $db->query($selectQuery);
+                                                    include_once "databaseQueries/connection.php";
+                                                    $results = $conn->query($selectQuery);
 
                                                     while ($row = $results->fetch()) {
                                                         echo "
@@ -143,12 +143,12 @@
                                                                                     <tr>
                                                                                         <td>order date</td>
                                                                                         <td>amount</td>
-                                                                                    </tr>
+                                                                                    </tr>s
                                                                                 </thead>
                                                                                 <tbody>
                                                                                     ";
                                                         $ordersSelectQuery = "SELECT * from orders where orders.customer_id = " . $row["customer_id"];
-                                                        $ordersResults = $db->query($ordersSelectQuery);
+                                                        $ordersResults = $conn->query($ordersSelectQuery);
                                                         while ($order = $ordersResults->fetch()) {
                                                             echo "<tr>
                                                                                         <td>
@@ -158,7 +158,7 @@
                                                                                             <article class='ac-sub-text'>";
                                                             $singleOrderQuery = "SELECT products.image ,order_product.number,order_product.order_id,order_product.product_id from order_product JOIN products on products.id = order_product.product_id WHERE order_product.order_id=" . $order["id"];
                                                             // echo "order id is  : ".$order["id"];
-                                                            $singleOrderResults = $db->query($singleOrderQuery);
+                                                            $singleOrderResults = $conn->query($singleOrderQuery);
                                                             while ($singleOrder = $singleOrderResults->fetch()) {
                                                                 echo "<br><img src = '" . $singleOrder["image"] . "' width='50px' height= '50px' style= 'margin : 10px'>" . $singleOrder["number"];
                                                             }
@@ -189,8 +189,9 @@
                                                     if (isset($_POST["dateTo"]) && !empty($_POST["dateTo"]) && isset($_POST["dateFrom"]) && !empty($_POST["dateFrom"]) ) {
                                                         $selectQuery = "SELECT users.name , orders.customer_id , SUM(total) as amount FROM orders JOIN users on users.id = orders.customer_id WHERE created_at BETWEEN '".$_POST['dateFrom']."' and '".$_POST['dateTo']."' GROUP by orders.customer_id";    
                                                     }
-                                                    $db = new PDO($dbn, $dbUser, $dbPassword);
-                                                    $results = $db->query($selectQuery);
+                                                    include_once "databaseQueries/connection.php";
+                                                    
+                                                    $results = $conn->query($selectQuery);
 
                                                     while ($row = $results->fetch()) {
                                                         echo "
@@ -210,7 +211,7 @@
                                                                                 <tbody>
                                                                                     ";
                                                         $ordersSelectQuery = "SELECT * from orders where orders.customer_id = " . $row["customer_id"];
-                                                        $ordersResults = $db->query($ordersSelectQuery);
+                                                        $ordersResults = $conn->query($ordersSelectQuery);
                                                         while ($order = $ordersResults->fetch()) {
                                                             echo "<tr>
                                                                                         <td>
@@ -220,7 +221,7 @@
                                                                                             <article class='ac-sub-text'>";
                                                             $singleOrderQuery = "SELECT products.image ,order_product.number,order_product.order_id,order_product.product_id from order_product JOIN products on products.id = order_product.product_id WHERE order_product.order_id=" . $order["id"];
                                                             // echo "order id is  : ".$order["id"];
-                                                            $singleOrderResults = $db->query($singleOrderQuery);
+                                                            $singleOrderResults = $conn->query($singleOrderQuery);
                                                             while ($singleOrder = $singleOrderResults->fetch()) {
                                                                 echo "<br><img src = '" . $singleOrder["image"] . "' width='50px' height= '50px' style= 'margin : 10px'>" . $singleOrder["number"];
                                                             }
@@ -247,8 +248,8 @@
                                             } else {
                                                 try {
                                                     $selectQuery = "SELECT users.name , orders.customer_id , SUM(total) as amount FROM orders JOIN users on users.id = orders.customer_id  GROUP by orders.customer_id;";
-                                                    $db = new PDO($dbn, $dbUser, $dbPassword);
-                                                    $results = $db->query($selectQuery);
+                                                    include_once "databaseQueries/connection.php";
+                                                    $results = $pass->query($selectQuery);
 
                                                     while ($row = $results->fetch()) {
                                                         echo "
@@ -268,7 +269,7 @@
                                                                                 <tbody>
                                                                                     ";
                                                         $ordersSelectQuery = "SELECT * from orders where orders.customer_id = " . $row["customer_id"];
-                                                        $ordersResults = $db->query($ordersSelectQuery);
+                                                        $ordersResults = $conn->query($ordersSelectQuery);
                                                         while ($order = $ordersResults->fetch()) {
                                                             echo "<tr>
                                                                                         <td>
@@ -278,7 +279,7 @@
                                                                                             <article class='ac-sub-text'>";
                                                             $singleOrderQuery = "SELECT products.image ,order_product.number,order_product.order_id,order_product.product_id from order_product JOIN products on products.id = order_product.product_id WHERE order_product.order_id=" . $order["id"];
                                                             // echo "order id is  : ".$order["id"];
-                                                            $singleOrderResults = $db->query($singleOrderQuery);
+                                                            $singleOrderResults = $conn->query($singleOrderQuery);
                                                             while ($singleOrder = $singleOrderResults->fetch()) {
                                                                 echo "<br><img src = '" . $singleOrder["image"] . "' width='50px' height= '50px' style= 'margin : 10px'>" . $singleOrder["number"];
                                                             }

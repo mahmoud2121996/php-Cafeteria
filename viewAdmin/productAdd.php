@@ -4,26 +4,25 @@ include_once "validations/middleware.php";
 
 if(isset($_POST['submit']))
 { 
-    $dsn = "mysql:host=localhost;dbname=cafeteria_php";
-    $user = "newuser";
-    $passwd = "password";
+    
     $target_dir = "../assets/images/products/";
     $file_name = $_FILES['productPicture']['name'];
     $target_file = $target_dir.$file_name;
     try 
     {
-        $pdo = new PDO($dsn, $user, $passwd);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // $pdo = new PDO($dsn, $user, $passwd);
+        include_once "databaseQueries/connection.php";
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "INSERT INTO products (product_name,price,category_id,image) VALUES (?,?,?,?)";
-        $stmtInsert= $pdo->prepare($sql);
+        $stmtInsert= $conn->prepare($sql);
         $stmtInsert->execute([ $_POST['productName'],$_POST['price'],$_POST['category'],$target_file ]);
         $source = $_FILES["productPicture"]['tmp_name'];
-       // move_uploaded_file($source,$target_file);
-        if (copy($source, $target_file)) {
-            echo "File is valid, and was successfully uploaded.\n";
-          } else {
-             echo "Upload failed";
-          }
+       move_uploaded_file($source,$target_file);
+        // if (copy($source, $target_file)) {
+        //     echo "File is valid, and was successfully uploaded.\n";
+        //   } else {
+        //      echo "Upload failed";
+        //   }
     }
     catch(PDOException $e)
     {
@@ -82,7 +81,7 @@ if(isset($_POST['submit']))
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <form id="contactForm" method="post" action="" enctype="multipart/form-data">
+                    <form method="POST"  enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -132,7 +131,7 @@ if(isset($_POST['submit']))
                                     </div>
                                 </div>
                             </div>            
-                        </form>
+                    </form>
                     </div>
                 </div>
             </div>
@@ -163,6 +162,5 @@ if(isset($_POST['submit']))
     <script src="../assets/js/TemplateJS/contact-form-script.js"></script>
     
     <!--===============================================================================================-->
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/admin/addUser.js"></script>
+    <!-- <script src="../assets/js/main.js"></script> -->
 </html>
