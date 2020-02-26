@@ -52,11 +52,11 @@
       padding-top: 0;
       padding-right: 15px;
       }
-      /* Change styles for span on extra small screens */
       @media screen and (max-width: 300px) {
       span.psw {
       display: block;
       float: none;
+      }
       }
     </style>
   </head>
