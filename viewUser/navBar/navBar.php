@@ -24,7 +24,7 @@
 
                     </ul>
                     &nbsp;
-                    <img src="<?php echo $_SESSION['profile_path'] ?>" style="border-radius:50%;" width="8%" alt="Admin">
+                    <img src="<?php echo $_SESSION['profile_path'] ?>" style="border-radius:50%;" width="8%" alt="User">
 
                 </div>
             </div>

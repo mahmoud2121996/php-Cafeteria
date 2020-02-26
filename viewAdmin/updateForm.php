@@ -34,7 +34,7 @@
       }
       h1 {
       text-align:center;
-      fone-size:18;
+      font-size:18;
       }
       button:hover {
       opacity: 0.8;
@@ -52,11 +52,11 @@
       padding-top: 0;
       padding-right: 15px;
       }
-      /* Change styles for span on extra small screens */
       @media screen and (max-width: 300px) {
       span.psw {
       display: block;
       float: none;
+      }
       }
     </style>
   </head>

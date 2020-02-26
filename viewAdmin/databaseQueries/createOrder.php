@@ -15,7 +15,7 @@ try {
         }    
     }
     header("location:../orders.php");
-} catch( PDOExecption $e ) {
+} catch( PDOException $e ) {
     print "Error!: " . $e->getMessage() . "</br>";
 } 
 
