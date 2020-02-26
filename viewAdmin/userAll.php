@@ -93,7 +93,7 @@ session_start();
 
                     echo "<td><a class=\"btn btn-danger\" href=\"delete.php?id=" . $row['id'] . "\">Delete</a>
                      
-                    <a class=\"btn btn-primary\" href=\"update.php?id=" . $row['id'] . "\">Update</a></td>";
+                    <a class=\"btn btn-primary\" href=\"update2.php?id=" . $row['id'] . "\">Update</a></td>";
                     echo "</tr>";
                     echo "</tbody>";
                   }
