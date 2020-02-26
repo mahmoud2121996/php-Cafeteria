@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    // session_start();
 
     if (isset($_SESSION["is_admin"])){
         if ($_SESSION["is_admin"]==1) {

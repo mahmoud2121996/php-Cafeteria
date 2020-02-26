@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             $dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";
             $dbUser = "root";
-            $dbPassword = "ITIintake40";
+            $dbPassword = "";
             $db = new PDO($dbn, $dbUser, $dbPassword);
             $selectQuery = " SELECT * from users where email = ? and password = ?";
             $results = $db->prepare($selectQuery);

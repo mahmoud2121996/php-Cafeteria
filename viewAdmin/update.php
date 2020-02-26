@@ -31,9 +31,6 @@
             }
         }
     }
-
-    //$id = $_GET['id'];
-    
      
     try {
         $con = new PDO("mysql:host=127.0.0.1;dbname=cafeteria_php;", $username, $password);
