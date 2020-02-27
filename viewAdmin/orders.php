@@ -146,7 +146,7 @@ include_once "databaseQueries/connection.php";
                                                     </tbody>
                                                 </table>
                                             </tr>
-                                        <?php $count++;
+                                        <?php 
                                     } ?>
                                         </tbody>
                                     </table>
