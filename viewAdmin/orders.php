@@ -187,13 +187,14 @@ include_once "databaseQueries/connection.php";
     <script>
         $('.deliver').click(function() {
             var del_id = $(this).attr('id');
-            var $ele = $(this).parent().parent().parent().parent();
+            var $ele = $(this);
             // $ele.next().remove();
             // $ele.remove();  
             $.ajax({
                 url: "deliverOrder.php?id=" + del_id,
                 success: function(result) {
                     // $ele.remove();
+                    $ele.remove();
                     alert("Order out for delivery");
                 }
 

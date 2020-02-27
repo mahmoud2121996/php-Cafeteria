@@ -90,8 +90,8 @@ include_once "validations/middleware.php";
 											<td>" . $row["price"] . "</td>
 											<td>" . $row["category_name"] . "</td>
 											<td> <img src='" . $row["image"] . "' width='75px' height='50px'></td>
-											<td><a class='roundedp-1 btn-danger' href='deleteProducts.php?id=" . $row["id"] . "' >delete</a> 
-											<a class='rounded p-1 btn-primary' href='updateProduct.php?id=" . $row["id"] . "' >update</a>
+											<td><a class='btn rounded p-1 btn-danger' href='deleteProducts.php?id=" . $row["id"] . "' >delete</a> 
+											<a class='btn rounded p-1 btn-primary' href='updateProducts2.php?id=" . $row["id"] . "' >update</a>
 											</td>
 											
 										</tr>";

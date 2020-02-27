@@ -101,14 +101,14 @@ $loggedId = $_SESSION["loggedId"];
                                         <th ><strong>Date</strong></th>
                                         <!-- <th><strong>Products</strong></th> -->
                                         <th><strong>Status</strong></th>
-                                        <th><strong>price</strong></th>
+                                        <th><strong>Total Price</strong></th>
                                         <th><strong>Action</strong></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr style="font-size:110%"><td align="center"><?php echo $row["created_at"]; ?></td>
                                         <!-- <td align="center">
-                                        <a style="color:blue;" href="productsImg.php?id=<?php echo $row["id"]; ?>">+</a>
+                                        <a style="color:blue;" href="productsImg.php?id=<?php //echo $row["id"]; ?>">+</a>
                                         </td> -->
                                         <td align="center"><?php echo $row["status"]; ?></td>
                                         <td align="center"><?php echo $row["total"]; ?></td>
@@ -145,7 +145,7 @@ $loggedId = $_SESSION["loggedId"];
                                                             <td align="center">
                                                                 <img src=<?php echo $img; ?> height='100px' width='100px'>
                                                                 <p><strong> Product : </strong> <?php echo $name;?>     <strong>Price : </strong><?php echo $price;?> L.E</p>
-                                                                <p><strong>Amount : </strong><?php echo $amount;?>    <strong>Total : </strong><?php echo $row2["total_price"]?> L.E </p>
+                                                                <p><strong>Amount : </strong><?php echo $amount;?>    <strong>Total : </strong><?php echo $amount*$price?> L.E </p>
                                                                 <p>  </p>
                                                             </td>
                                                             <?php
@@ -200,10 +200,11 @@ $loggedId = $_SESSION["loggedId"];
     <script>    
             $('.trash').click(function(){
                 var del_id= $(this).attr('id');
-                var $ele = $(this).parent().parent();
+                var $ele = $(this).parent().parent().parent().parent();
                 $.ajax({
                     url:"cancelOrder.php?id="+ del_id,
                 success: function(result){
+                        $ele.next().remove();
                         $ele.remove();
                         alert("Deleted Successfully");
                 }
