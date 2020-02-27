@@ -197,10 +197,11 @@ $loggedId = $_SESSION["loggedId"];
     <script>    
             $('.trash').click(function(){
                 var del_id= $(this).attr('id');
-                var $ele = $(this).parent().parent();
+                var $ele = $(this).parent().parent().parent().parent();
                 $.ajax({
                     url:"cancelOrder.php?id="+ del_id,
                 success: function(result){
+                        $ele.next().remove();
                         $ele.remove();
                         alert("Deleted Successfully");
                 }
