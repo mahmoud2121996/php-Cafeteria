@@ -14,7 +14,8 @@ echo $id;
     
         $pdoResult = $conn->prepare($pdoQuery);
         $pdoExec = $pdoResult->execute();
-        echo"deleted successfully";
+        // echo"deleted successfully";
+        header("location:userAll.php");
     
     } catch(PDOException $e)
     {

@@ -53,15 +53,20 @@ if(isset($_POST['update']))
 		$pass=$_POST["pass"];
         $email=$_POST["username"];
 	try {
-		$con = new PDO("mysql:host=127.0.0.1;dbname=cafeteria_php;", $username, $password);
-        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$db_config = parse_ini_file('config.sample.ini');
+		$conn = new PDO("mysql:dbname={$db_config['db_name']};".
+								"host={$db_config['db_host']};".
+								"port={$db_config['db_port']};",
+								$db_config['db_user'],
+								$db_config['db_pass']);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
        
         $query = "UPDATE users SET password= '$pass'  where email='$email' ;";
       
-        $pdoResult = $con->prepare($query);
+        $pdoResult = $conn->prepare($query);
         
         $pdoExec = $pdoResult->execute();
-       
+       header("location:login.php");
 	} catch (PDOException $e) {
 		echo "Connectionupdatefailed: " . $e->getMessage();
 	}
