@@ -1,8 +1,3 @@
-<?php
-session_start();
-include_once "validations/middleware.php";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,6 +58,7 @@ include_once "validations/middleware.php";
     </header>
 
     <body>
+    <br><br><br><br>
         <!-- <section id="tabs" class="project-tab"> -->
         <div id="tabs" class="project-tab" style="margin-top: 50px;">
             <div class="container">
@@ -89,9 +85,14 @@ include_once "validations/middleware.php";
                                     <label for="users">users : </label>
                                     <select name="users" id="">
                                         <?php
-                                        include_once "databaseQueries/connection.php";
+                                        $selectQuery = "select * from users";
+                                        $dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";
+                                        $dbUser = "root";
+                                        $dbPassword = "";
+                                        $divCount = 0;
                                         try {
-                                            $results = $conn->query($selectQuery);
+                                            $db = new PDO($dbn, $dbUser, $dbPassword);
+                                            $results = $db->query($selectQuery);
                                             echo "<option value='all'>all users</option>";
 
                                             while ($row = $results->fetch()) {
@@ -106,7 +107,7 @@ include_once "validations/middleware.php";
                                 </form>
                                 <!-- checks -->
                                 <section class="container">
-                                    <table border="5">
+                                    <table border="5" class = "table">
                                         <thead>
                                             <tr>
                                                 <td>name</td>
@@ -127,8 +128,8 @@ include_once "validations/middleware.php";
                                                             $selectQuery = "SELECT users.name , orders.customer_id , SUM(total) as amount FROM orders JOIN users on users.id = orders.customer_id where users.name='" . $_POST["users"] . "' GROUP by orders.customer_id";
                                                         }
                                                     }
-                                                    include_once "databaseQueries/connection.php";
-                                                    $results = $conn->query($selectQuery);
+                                                    $db = new PDO($dbn, $dbUser, $dbPassword);
+                                                    $results = $db->query($selectQuery);
 
                                                     while ($row = $results->fetch()) {
                                                         echo "
@@ -138,17 +139,17 @@ include_once "validations/middleware.php";
                                                                         <input class='ac-input' id='ac-" . ++$divCount . "' name='ac-" . $divCount . "' type='checkbox' />
                                                                         <label class='ac-label' for='ac-" . $divCount . "'>" . $row["name"] . "</label>
                                                                         <article class='ac-text'>
-                                                                            <table border = '5'>
+                                                                            <table border = '5' class = 'table'>
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <td>order date</td>
                                                                                         <td>amount</td>
-                                                                                    </tr>s
+                                                                                    </tr>
                                                                                 </thead>
                                                                                 <tbody>
                                                                                     ";
                                                         $ordersSelectQuery = "SELECT * from orders where orders.customer_id = " . $row["customer_id"];
-                                                        $ordersResults = $conn->query($ordersSelectQuery);
+                                                        $ordersResults = $db->query($ordersSelectQuery);
                                                         while ($order = $ordersResults->fetch()) {
                                                             echo "<tr>
                                                                                         <td>
@@ -158,7 +159,7 @@ include_once "validations/middleware.php";
                                                                                             <article class='ac-sub-text'>";
                                                             $singleOrderQuery = "SELECT products.image ,order_product.number,order_product.order_id,order_product.product_id from order_product JOIN products on products.id = order_product.product_id WHERE order_product.order_id=" . $order["id"];
                                                             // echo "order id is  : ".$order["id"];
-                                                            $singleOrderResults = $conn->query($singleOrderQuery);
+                                                            $singleOrderResults = $db->query($singleOrderQuery);
                                                             while ($singleOrder = $singleOrderResults->fetch()) {
                                                                 echo "<br><img src = '" . $singleOrder["image"] . "' width='50px' height= '50px' style= 'margin : 10px'>" . $singleOrder["number"];
                                                             }
@@ -189,9 +190,8 @@ include_once "validations/middleware.php";
                                                     if (isset($_POST["dateTo"]) && !empty($_POST["dateTo"]) && isset($_POST["dateFrom"]) && !empty($_POST["dateFrom"]) ) {
                                                         $selectQuery = "SELECT users.name , orders.customer_id , SUM(total) as amount FROM orders JOIN users on users.id = orders.customer_id WHERE created_at BETWEEN '".$_POST['dateFrom']."' and '".$_POST['dateTo']."' GROUP by orders.customer_id";    
                                                     }
-                                                    include_once "databaseQueries/connection.php";
-                                                    
-                                                    $results = $conn->query($selectQuery);
+                                                    $db = new PDO($dbn, $dbUser, $dbPassword);
+                                                    $results = $db->query($selectQuery);
 
                                                     while ($row = $results->fetch()) {
                                                         echo "
@@ -201,7 +201,7 @@ include_once "validations/middleware.php";
                                                                         <input class='ac-input' id='ac-" . ++$divCount . "' name='ac-" . $divCount . "' type='checkbox' />
                                                                         <label class='ac-label' for='ac-" . $divCount . "'>" . $row["name"] . "</label>
                                                                         <article class='ac-text'>
-                                                                            <table border = '5'>
+                                                                            <table border = '5' class = 'table'>
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <td>order date</td>
@@ -211,7 +211,7 @@ include_once "validations/middleware.php";
                                                                                 <tbody>
                                                                                     ";
                                                         $ordersSelectQuery = "SELECT * from orders where orders.customer_id = " . $row["customer_id"];
-                                                        $ordersResults = $conn->query($ordersSelectQuery);
+                                                        $ordersResults = $db->query($ordersSelectQuery);
                                                         while ($order = $ordersResults->fetch()) {
                                                             echo "<tr>
                                                                                         <td>
@@ -221,7 +221,7 @@ include_once "validations/middleware.php";
                                                                                             <article class='ac-sub-text'>";
                                                             $singleOrderQuery = "SELECT products.image ,order_product.number,order_product.order_id,order_product.product_id from order_product JOIN products on products.id = order_product.product_id WHERE order_product.order_id=" . $order["id"];
                                                             // echo "order id is  : ".$order["id"];
-                                                            $singleOrderResults = $conn->query($singleOrderQuery);
+                                                            $singleOrderResults = $db->query($singleOrderQuery);
                                                             while ($singleOrder = $singleOrderResults->fetch()) {
                                                                 echo "<br><img src = '" . $singleOrder["image"] . "' width='50px' height= '50px' style= 'margin : 10px'>" . $singleOrder["number"];
                                                             }
@@ -248,8 +248,8 @@ include_once "validations/middleware.php";
                                             } else {
                                                 try {
                                                     $selectQuery = "SELECT users.name , orders.customer_id , SUM(total) as amount FROM orders JOIN users on users.id = orders.customer_id  GROUP by orders.customer_id;";
-                                                    include_once "databaseQueries/connection.php";
-                                                    $results = $pass->query($selectQuery);
+                                                    $db = new PDO($dbn, $dbUser, $dbPassword);
+                                                    $results = $db->query($selectQuery);
 
                                                     while ($row = $results->fetch()) {
                                                         echo "
@@ -259,7 +259,7 @@ include_once "validations/middleware.php";
                                                                         <input class='ac-input' id='ac-" . ++$divCount . "' name='ac-" . $divCount . "' type='checkbox' />
                                                                         <label class='ac-label' for='ac-" . $divCount . "'>" . $row["name"] . "</label>
                                                                         <article class='ac-text'>
-                                                                            <table border = '5'>
+                                                                            <table border = '5' class = 'table'>
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <td>order date</td>
@@ -269,7 +269,7 @@ include_once "validations/middleware.php";
                                                                                 <tbody>
                                                                                     ";
                                                         $ordersSelectQuery = "SELECT * from orders where orders.customer_id = " . $row["customer_id"];
-                                                        $ordersResults = $conn->query($ordersSelectQuery);
+                                                        $ordersResults = $db->query($ordersSelectQuery);
                                                         while ($order = $ordersResults->fetch()) {
                                                             echo "<tr>
                                                                                         <td>
@@ -279,7 +279,7 @@ include_once "validations/middleware.php";
                                                                                             <article class='ac-sub-text'>";
                                                             $singleOrderQuery = "SELECT products.image ,order_product.number,order_product.order_id,order_product.product_id from order_product JOIN products on products.id = order_product.product_id WHERE order_product.order_id=" . $order["id"];
                                                             // echo "order id is  : ".$order["id"];
-                                                            $singleOrderResults = $conn->query($singleOrderQuery);
+                                                            $singleOrderResults = $db->query($singleOrderQuery);
                                                             while ($singleOrder = $singleOrderResults->fetch()) {
                                                                 echo "<br><img src = '" . $singleOrder["image"] . "' width='50px' height= '50px' style= 'margin : 10px'>" . $singleOrder["number"];
                                                             }
