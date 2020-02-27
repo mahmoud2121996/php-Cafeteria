@@ -10,5 +10,5 @@
                             $db_config['db_pass']);
 
     $_SESSION["conn"] = $conn;
-    var_dump($_SESSION);
+    // var_dump($_SESSION);
 ?>
