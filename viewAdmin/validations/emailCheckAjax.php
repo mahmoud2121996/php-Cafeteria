@@ -1,21 +1,19 @@
 <?php
-    $connect = mysqli_connect("localhost","root","ITIintake40","cafeteria_php");
-    $query   = "SELECT email FROM users";
-    if ($result=mysqli_query($connect,$query))
-      {
-      // Fetch one and one row
-      while ($row=mysqli_fetch_row($result))
-        {
-         $emails = $row;
-        }
-      // Free result set
-      mysqli_free_result($result);
+    
+    include_once "../databaseQueries/connection.php";
+    $email = $_GET['email'];
+
+    $sql = "SELECT * FROM users where email = '$email'"; 
+    $resultAjax = $conn->prepare($sql); 
+    $resultAjax->execute(); 
+    $number_of_rows = $resultAjax->fetchColumn(); 
+
+    echo  $number_of_rows ;
+    if (($number_of_rows)>0) {
+        echo "anything to show the error message;" ;
     }
+   
 
 
-
-if (in_array($_GET['email'], $emails)) {
-   echo "this email already exists";
-}
 
 ?>

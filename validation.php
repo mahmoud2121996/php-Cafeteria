@@ -23,22 +23,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             $dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";
             $dbUser = "root";
-            $dbPassword = "";
+            $dbPassword = "ITIintake40";
             $db = new PDO($dbn, $dbUser, $dbPassword);
             $selectQuery = " SELECT * from users where email = ? and password = ?";
             $results = $db->prepare($selectQuery);
             $results->execute([$userEmail, $userPassword]);
             if ($results = $results->fetch()) {
                 if ($results["email"] == $userEmail && $results["password"]) {
+                    $_SESSION["loggedId"] = $results["id"];
                     $_SESSION["name"] = $results["name"];
+                    $_SESSION["is_admin"] = $results["is_admin"];
+                    $_SESSION["profile_path"] = $results["profile_path"];
+
+                    if ($_SESSION["is_admin"]) {
+                        header('Location: viewAdmin/home.php');
+                    }else {
+                        header('Location: viewUser/home.php');
+                    }
                     
-                    // echo "welcom ".$_SESSION["name"]." to dummy home page...";
-                    header('Location: dumyHome.php');
                 } else {
-                    echo "email or password is wrong...";
+                    echo "<h1 style='color:red;'>email or password is wrong...<h1>";
+                    header('refresh:1; login.php');
                 }
             } else {
-                echo "email or password is wrong...";
+                echo "<h1 style='color:red;'>email or password is wrong...<h1>";
+                    header('refresh:2; login.php');
             }
 
             // echo "num of rows : " . $results->num ;
