@@ -1,7 +1,7 @@
 <?php
 session_start();
-// include_once "validations/middleware.php";
-
+include_once "validations/middleware.php";
+include_once "databaseQueries/connection.php"
 ?>
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
@@ -83,19 +83,11 @@ session_start();
                                     <div class="col-md-8">
                                         <div class="form-group">
                                         <label for="users">users : </label>
-                                        
                                                 <select name="users" class="browser-default custom-select" id="">
-                                         
-                                    
                                         <?php
                                         $selectQuery = "select * from users";
-                                        // $dbn = "mysql:dbname=cafeteria_php;host=127.0.0.1;port=3306;";
-                                        // $dbUser = "root";
-                                        // $dbPassword = "";
-                                        include_once "databaseQueries/connection.php";
                                         $divCount = 0;
                                         try {
-                                            // $db = new PDO($dbn, $dbUser, $dbPassword);
                                             $results = $conn->query($selectQuery);
                                             echo "<option value='all'>all users</option>";
 
@@ -123,18 +115,17 @@ session_start();
                                 </form>
                                 <!-- checks -->
                                 <section class="container">
-                                    <table class="table text-center" border="5" class = "table">
-                                        <thead>
+                                    <table class="table text-center " border="3" class = "table">
+                                        <thead class="thead-light">
                                             <tr>
-                                                <td>name</td>
-                                                <td>amount</td>
+                                                <th >Name</th>
+                                                <th >Amount</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                             <?php
                                             if (isset($_POST["selectUser"])) {
-                                                echo "by user";
                                                 try {
                                                     $selectQuery = "SELECT users.name , orders.customer_id , SUM(total) as amount FROM orders JOIN users on users.id = orders.customer_id  GROUP by orders.customer_id;";
                                                     if (isset($_POST["users"]) && !empty($_POST["users"])) {
@@ -144,10 +135,7 @@ session_start();
                                                             $selectQuery = "SELECT users.name , orders.customer_id , SUM(total) as amount FROM orders JOIN users on users.id = orders.customer_id where users.name='" . $_POST["users"] . "' GROUP by orders.customer_id";
                                                         }
                                                     }
-                                                    // $db = new PDO($dbn, $dbUser, $dbPassword);
-                                                    include_once "databaseQueries/connection.php";
                                                     $results = $conn->query($selectQuery);
-
                                                     while ($row = $results->fetch()) {
                                                         echo "
                                                             <tr>
@@ -184,7 +172,7 @@ session_start();
                                                             echo "</article>
                                                                                             <div>
                                                                                         </td>
-                                                                                            <td>" . $order["total"] . "</td>
+                                                                                            <td>" . $order["total"] ." EGP". "</td>
                                                                                         </tr>";
                                                         }
                                                         echo "
@@ -193,7 +181,7 @@ session_start();
                                                                         </article>
                                                                     </div>
                                                                 </td>
-                                                                <td>" . $row["amount"] . "</td>
+                                                                <td>" . $row["amount"] ." EGP". "</td>
                                                             </tr>
                                                         ";
                                                     }
@@ -207,8 +195,8 @@ session_start();
                                                     if (isset($_POST["dateTo"]) && !empty($_POST["dateTo"]) && isset($_POST["dateFrom"]) && !empty($_POST["dateFrom"]) ) {
                                                         $selectQuery = "SELECT users.name , orders.customer_id , SUM(total) as amount FROM orders JOIN users on users.id = orders.customer_id WHERE created_at BETWEEN '".$_POST['dateFrom']."' and '".$_POST['dateTo']."' GROUP by orders.customer_id";    
                                                     }
-                                                    // $db = new PDO($dbn, $dbUser, $dbPassword);
-                                                    include_once "databaseQueries/connection.php";
+                                                    
+                                                   
                                                     $results = $conn->query($selectQuery);
 
                                                     while ($row = $results->fetch()) {
@@ -247,7 +235,7 @@ session_start();
                                                             echo "</article>
                                                                                             <div>
                                                                                         </td>
-                                                                                            <td>" . $order["total"] . "</td>
+                                                                                            <td>" . $order["total"] ." EGP"."</td>
                                                                                         </tr>";
                                                         }
                                                         echo "
@@ -256,7 +244,7 @@ session_start();
                                                                         </article>
                                                                     </div>
                                                                 </td>
-                                                                <td>" . $row["amount"] . "</td>
+                                                                <td>" . $row["amount"] ." EGP". "</td>
                                                             </tr>
                                                         ";
                                                     }
@@ -266,8 +254,8 @@ session_start();
                                             } else {
                                                 try {
                                                     $selectQuery = "SELECT users.name , orders.customer_id , SUM(total) as amount FROM orders JOIN users on users.id = orders.customer_id  GROUP by orders.customer_id;";
-                                                    // $db = new PDO($dbn, $dbUser, $dbPassword);
-                                                    include_once "databaseQueries/connection.php";
+                                                    
+                                                   
                                                     $results = $conn->query($selectQuery);
 
                                                     while ($row = $results->fetch()) {
@@ -306,7 +294,7 @@ session_start();
                                                             echo "</article>
                                                                                             <div>
                                                                                         </td>
-                                                                                            <td>" . $order["total"] . "</td>
+                                                                                            <td>" . $order["total"] ." EGP". "</td>
                                                                                         </tr>";
                                                         }
                                                         echo "
@@ -315,7 +303,7 @@ session_start();
                                                                         </article>
                                                                     </div>
                                                                 </td>
-                                                                <td>" . $row["amount"] . "</td>
+                                                                <td>" . $row["amount"] ." EGP". "</td>
                                                             </tr>
                                                         ";
                                                     }

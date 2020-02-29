@@ -144,8 +144,8 @@ $loggedId = $_SESSION["loggedId"];
                                                             ?>
                                                             <td align="center">
                                                                 <img src=<?php echo $img; ?> height='100px' width='100px'>
-                                                                <p><strong> Product : </strong> <?php echo $name;?>     <strong>Price : </strong><?php echo $price;?> L.E</p>
-                                                                <p><strong>Amount : </strong><?php echo $amount;?>    <strong>Total : </strong><?php echo $amount*$price?> L.E </p>
+                                                                <p><strong> Product : </strong> <?php echo $name."  ";?>     <strong> &nbsp; Price : </strong><?php echo $price;?> EGP</p>
+                                                                <p><strong>Amount : </strong><?php echo $amount;?>   <br> <strong>Total : </strong><?php echo $amount*$price?> EGP </p>
                                                                 <p>  </p>
                                                             </td>
                                                             <?php

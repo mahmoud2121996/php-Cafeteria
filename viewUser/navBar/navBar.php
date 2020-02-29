@@ -10,7 +10,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbars-rs-food">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" href="home.php">Home</a></li>
+                        <li class="nav-item "><a class="nav-link" href="home.php">Home</a></li>
                         <li class="nav-item "><a class="nav-link" href="orders.php">Orders</a></li>
 
                         <li class="nav-item dropdown">

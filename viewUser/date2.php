@@ -1,6 +1,8 @@
 <?php
 session_start();
 include_once "validations/middleware.php";
+include_once "databaseQueries/connection.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
@@ -93,13 +95,6 @@ include_once "validations/middleware.php";
                                         <?php
                                         $dateFrom = $_POST["dateFrom"];
                                         $dateTo = $_POST["dateTo"];
-                                        // $db_config = parse_ini_file('config.sample.ini');
-                                        // $conn = new PDO("mysql:dbname={$db_config['db_name']};".
-                                        //                         "host={$db_config['db_host']};".
-                                        //                         "port={$db_config['db_port']};",
-                                        //                         $db_config['db_user'],
-                                        //                         $db_config['db_pass']);
-                                        include_once "databaseQueries/connection.php";
                                         $_SESSION["dateFrom"] = $dateFrom;
                                         $_SESSION["dateTo"] = $dateTo;
                                         // $conn = new PDO($dsn , $user, $pass);

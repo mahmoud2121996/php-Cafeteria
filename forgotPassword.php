@@ -1,3 +1,41 @@
+<?php
+
+$passworderror = "";
+$servername = "localhost";
+$username = "root";
+$password = "";
+
+
+if(isset($_POST['update']))
+{
+	if ($_POST["pass"] !== $_POST["passConfirm"]) {
+		$passworderror = "passwords don't match";
+		" <br/>";
+	}
+	else{
+		$pass=$_POST["pass"];
+        $email=$_POST["username"];
+		try {
+			$db_config = parse_ini_file('config.sample.ini');
+			$conn = new PDO("mysql:dbname={$db_config['db_name']};".
+									"host={$db_config['db_host']};".
+									"port={$db_config['db_port']};",
+									$db_config['db_user'],
+									$db_config['db_pass']);
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+			$query = "UPDATE users SET password= '$pass'  where email='$email' ;";
+		
+			$pdoResult = $conn->prepare($query);
+			
+			$pdoExec = $pdoResult->execute();
+		header("location:login.php");
+		} catch (PDOException $e) {
+			echo "Connectionupdatefailed: " . $e->getMessage();
+		}
+   }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,48 +73,7 @@
 </head>
 
 <body>
-<?php
 
-$passworderror = "";
-$servername = "localhost";
-$username = "root";
-$password = "";
-
-
-if(isset($_POST['update']))
-{
-	if ($_POST["pass"] !== $_POST["passConfirm"]) {
-		$passworderror = "password not match";
-		" <br/>";
-	}
-	else{
-		$pass=$_POST["pass"];
-        $email=$_POST["username"];
-	try {
-		$db_config = parse_ini_file('config.sample.ini');
-		$conn = new PDO("mysql:dbname={$db_config['db_name']};".
-								"host={$db_config['db_host']};".
-								"port={$db_config['db_port']};",
-								$db_config['db_user'],
-								$db_config['db_pass']);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-       
-        $query = "UPDATE users SET password= '$pass'  where email='$email' ;";
-      
-        $pdoResult = $conn->prepare($query);
-        
-        $pdoExec = $pdoResult->execute();
-       header("location:login.php");
-	} catch (PDOException $e) {
-		echo "Connectionupdatefailed: " . $e->getMessage();
-	}
-	
-}
-}
-
-
-
-?>
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
@@ -95,13 +92,6 @@ if(isset($_POST['update']))
 						Forget Password
 					</span>
 
-					<span class="txt1 p-b-11">
-						Name
-					</span>
-					<div class="wrap-input100 validate-input m-b-36" data-validate="Username is required">
-						<input class="input100" type="text" name="name">
-						<span class="focus-input100"></span>
-					</div>
 					<span class="txt1 p-b-11">
 						Email
 					</span>

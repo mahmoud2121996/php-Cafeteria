@@ -1,13 +1,20 @@
 <?php
 session_start();
 include_once "validations/middleware.php";
-
+include_once "validations/randomString.php";
 if(isset($_POST['submit']))
 { 
     
+    
+
+    $path = $_FILES['productPicture']['name'];
+    $ext = pathinfo($path, PATHINFO_EXTENSION);
+
     $target_dir = "../assets/images/products/";
-    $file_name = $_FILES['productPicture']['name'];
-    $target_file = $target_dir.$file_name;
+    $new_name =generateRandomString().".".$ext;
+    $target_file = $target_dir.$new_name;
+    $get_file="../assets/images/products/".$new_name;
+
     try 
     {
         // $pdo = new PDO($dsn, $user, $passwd);
@@ -15,14 +22,10 @@ if(isset($_POST['submit']))
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "INSERT INTO products (product_name,price,category_id,image) VALUES (?,?,?,?)";
         $stmtInsert= $conn->prepare($sql);
-        $stmtInsert->execute([ $_POST['productName'],$_POST['price'],$_POST['category'],$target_file ]);
+        $stmtInsert->execute([ $_POST['productName'],$_POST['price'],$_POST['category'],$get_file ]);
         $source = $_FILES["productPicture"]['tmp_name'];
-       move_uploaded_file($source,$target_file);
-        // if (copy($source, $target_file)) {
-        //     echo "File is valid, and was successfully uploaded.\n";
-        //   } else {
-        //      echo "Upload failed";
-        //   }
+        move_uploaded_file($source,$target_file);
+        header("location:productAll.php");
     }
     catch(PDOException $e)
     {
