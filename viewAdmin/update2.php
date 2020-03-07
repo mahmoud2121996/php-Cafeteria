@@ -15,7 +15,7 @@
         $imgPath = $_POST["profile_path"];
 
         if (isset($_FILES["file"]) && !empty($_FILES["file"])) {
-            $images = "userImages";
+            $images = "../assets/images/users/";
             $imageTmpName = $_FILES["file"]["tmp_name"];
             $imageName = $_FILES["file"]["name"];
             $fileType = $_FILES["file"]["type"];
@@ -60,17 +60,6 @@
             $room_No = $row["room_No"];
             $ext = $row["Ext"];
             $imgPath = $row["profile_path"];
-
-           /* echo "<form action='update.php' enctype='multipart/form-data' method='POST'>";
-            echo "<input type='text' name='name' required placeholder='name' value = '" . $name . "'><br><br>
-            <input type='text' name='email' required placeholder='email' value = '" . $email . "'><br><br>
-            <input type='text' name='is_admin' required placeholder='isadmin' value= '" . $is_admin . "' ><br><br>
-            <input type='text' name='room_No' required placeholder='roomno' value= '" . $room_No . "' ><br><br>
-            <input type='text' name='ext' required placeholder='ext' value= '" . $ext . "' ><br><br>
-            <input type='file' name='file'><br><br>
-            <input type='hidden' name='id' value = '" . $_GET["id"] . "'><br><br>
-            <input type='hidden' name='profile_path' value = '" . $imgPath . "'><br><br>
-            <input type='submit' name='update' value = 'update '></form>"; */
         } catch (\Throwable $th) {
             //throw $th;
         }

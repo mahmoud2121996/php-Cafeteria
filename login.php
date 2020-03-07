@@ -37,7 +37,7 @@
 <header class="top-navbar">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">
+			<a class="navbar-brand" href="login.php">
 				<img src="assets/images/logo.png" alt="" />
 			</a>
 		</div>

@@ -3,43 +3,23 @@ session_start();
 include_once "validations/middleware.php";
 include_once "validations/randomString.php";
 
-if(isset($_POST['submit']))
+
+if(isset($_POST['category']))
 { 
-    
-    
-
-    $path = $_FILES['productPicture']['name'];
-    $ext = pathinfo($path, PATHINFO_EXTENSION);
-
-    $target_dir = "../assets/images/products/";
-    $new_name =generateRandomString().".".$ext;
-    $target_file = $target_dir.$new_name;
-    $get_file="../assets/images/products/".$new_name;
-
     try 
     {
         include_once "databaseQueries/connection.php";
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "INSERT INTO products (product_name,price,category_id,image) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO category_product (category_name) VALUES (?)";
         $stmtInsert= $conn->prepare($sql);
-        $stmtInsert->execute([ $_POST['productName'],$_POST['price'],$_POST['category'],$get_file ]);
-        $source = $_FILES["productPicture"]['tmp_name'];
-        move_uploaded_file($source,$target_file);
-        header("location:productAll.php");
+        $stmtInsert->execute([ $_POST['category']]);
+        header("location:productAdd.php");
     }
     catch(PDOException $e)
     {
         echo "Connection failed: " . $e->getMessage();
     }
 }
-try {
-    include_once "databaseQueries/connection.php";
-    $stmAll = $conn->query("SELECT * FROM category_product");
-    $categoriesAll = $stmAll->fetchAll(PDO::FETCH_NUM);
-} catch(PDOException $e){
-    echo "Connection failed: " . $e->getMessage();
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
@@ -85,53 +65,23 @@ try {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="heading-title text-center">
-                            <h2>Products</h2>
-                            <p>Here you can add new products and their details </p>
+                            <h2>Add Categories</h2>
+                            <p>Here you can add new Categories </p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                    <form method="POST"  enctype="multipart/form-data">
+                    <form method="POST" >
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <h2>Product</h2>
-                                        <input type="text" class="form-control" name="productName" placeholder="Product Name" required data-error="Please enter product Name">
+                                        <h2>Category</h2>
+                                        <input type="text" class="form-control" name="category" placeholder="Category" required data-error="Please enter category Name">
                                         <div class="help-block with-errors"></div>
                                     </div>                                 
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                        <h2>Price</h2>
-                                        <div class="div" style="display: flex;">
-                                            <input type="number" step="0.01" placeholder="Price" style="width: 10%;" class="form-control" name="price" required data-error="Please enter price">
-                                            <h1 style="margin-left: 10px; margin-top: 10px;">EGP</h1>
-                                        </div>
-                                        <div class="help-block with-errors"></div>
-                                    </div> 
-                                </div>
-                                <div class="col-md-12">
-                                    <h2>Category</h2>
-                                    <div style="display: flex;">
-                                        <div class="form-group" style="flex-basis: 87%;">
-                                            <select class="custom-select d-block form-control" name="category" required data-error="Please Select Category">
-                                            <option disabled selected>Please Select Category*</option>
-                                                    <?php  foreach ($categoriesAll as $category):?>
-                                                    <option value="<?php echo $category[0] ?>"><?php echo $category[1] ?></option>                                                   
-                                                    <?php endforeach; ?>
-                                            </select>
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                        <a href="categoryAdd.php" style="margin-left: 10px; margin-top: 10px;font-size: larger;flex-basis: 13%;">Add New Category</a> 
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group"> 
-                                        <h2>Product Picture</h2>
-                                        <input class="input100" type="file" name="productPicture" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
                                     <div class="submit-button text-center" style="display: flex;">
                                         <button class="btn btn-common" id="reset" type="reset">Reset</button>
                                         <button class="btn btn-common"name="submit" type="submit" style="opacity: 1;margin-left: 5px;">Save</button>
@@ -139,7 +89,7 @@ try {
                                         <div class="clearfix"></div> 
                                         
                                     </div>
-                                </div>
+                                </div> 
                             </div>            
                     </form>
                     </div>
