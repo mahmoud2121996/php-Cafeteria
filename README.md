@@ -1,19 +1,19 @@
 # Cafeteria-Ordering-System
 
-The Cafeteria Ordering System is a new system that replaces the current manual and telephone processes for ordering and picking up lunches in the Process Impact cafeteria
+The Cafeteria Ordering System is a new system that replaces the current manual and telephone processes for ordering and picking up lunches in the Process Impact cafeteria.
 
 ## Feautures
 
 ### As Admin User
-* Add update or delete users
-* Add update or remove products
-* View Current orders and change orders status
-* View all users checks and their orders
+* Add, update or delete users.
+* Add, update or remove products.
+* View Current orders and change orders status.
+* View all users checks and their orders.
 
 ### As Normal User
-* use home screen to order products
-* Add to cart
-* View his current orders and cancel unwanted orders
+* use home screen to order products.
+* Add to cart.
+* View his current orders and cancel unwanted orders.
 
 ### Prerequisites
 

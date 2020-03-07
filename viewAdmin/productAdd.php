@@ -2,6 +2,7 @@
 session_start();
 include_once "validations/middleware.php";
 include_once "validations/randomString.php";
+
 if(isset($_POST['submit']))
 { 
     
@@ -17,7 +18,6 @@ if(isset($_POST['submit']))
 
     try 
     {
-        // $pdo = new PDO($dsn, $user, $passwd);
         include_once "databaseQueries/connection.php";
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "INSERT INTO products (product_name,price,category_id,image) VALUES (?,?,?,?)";
@@ -32,6 +32,14 @@ if(isset($_POST['submit']))
         echo "Connection failed: " . $e->getMessage();
     }
 }
+try {
+    include_once "databaseQueries/connection.php";
+    $stmAll = $conn->query("SELECT * FROM category_product");
+    $categoriesAll = $stmAll->fetchAll(PDO::FETCH_NUM);
+} catch(PDOException $e){
+    echo "Connection failed: " . $e->getMessage();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
@@ -109,10 +117,9 @@ if(isset($_POST['submit']))
                                         <div class="form-group" style="flex-basis: 87%;">
                                             <select class="custom-select d-block form-control" name="category" required data-error="Please Select Category">
                                             <option disabled selected>Please Select Category*</option>
-                                            <option value="1">Hot Drinks</option>
-                                            <option value="2">Cold Drinks</option>
-                                            <option value="3">Meals</option>
-                                            <option value="4">Fruits</option>
+                                                    <?php  foreach ($categoriesAll as $category):?>
+                                                    <option value="<?php echo $category[0] ?>"><?php echo $category[1] ?></option>                                                   
+                                                    <?php endforeach; ?>
                                             </select>
                                             <div class="help-block with-errors"></div>
                                         </div>
@@ -165,5 +172,5 @@ if(isset($_POST['submit']))
     <script src="../assets/js/TemplateJS/contact-form-script.js"></script>
     
     <!--===============================================================================================-->
-    <!-- <script src="../assets/js/main.js"></script> -->
+    <script src="../assets/js/main.js"></script>
 </html>
